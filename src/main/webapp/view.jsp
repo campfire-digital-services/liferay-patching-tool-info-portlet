@@ -2,6 +2,7 @@
 
 <portlet:defineObjects />
 
+<div id="patching_tool_info_details">
 <%
 String shell = System.getProperty("env.SHELL", "/bin/bash");
 String command = System.getProperty("liferay.home") + "/patching-tool/patching-tool." + (shell.startsWith("/") ? "sh" : "bat") + " info";
@@ -10,8 +11,9 @@ java.util.List<String> lines = org.apache.commons.io.IOUtils.readLines(p.getInpu
 p.waitFor();
 for (String line : lines) {
 %>
-<%= line%><br/>
+<%= line %> <br>
 <%
 }
 %>
+</div>
 

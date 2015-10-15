@@ -9,7 +9,12 @@
 	<version>0.1-SNAPSHOT</version>
 	
 	<properties>
-		<liferay.version>6.1.20</liferay.version>
+		<liferay.version>6.1.1</liferay.version>
+		<commons-io.version>2.1</commons-io.version>
+		<portlet-api.version>2.0</portlet-api.version>
+		<servlet-api.version>2.4</servlet-api.version>
+		<javax.servlet.jsp.version>2.0</javax.servlet.jsp.version>
+		<jstl.version>1.2</jstl.version>
 	</properties>
 	
 	<build>
@@ -61,31 +66,30 @@
 		<dependency>
 			<groupId>javax.portlet</groupId>
 			<artifactId>portlet-api</artifactId>
-			<version>2.0</version>
+			<version>${portlet-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
-			<version>2.4</version>
+			<version>${servlet-api.version}</version>
 			<scope>provided</scope>			
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
-			<version>2.0</version>
+			<version>${javax.servlet.jsp.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+			<version>${jstl.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.1</version>
+			<version>${commons-io.version}</version>
 		</dependency>				
 	</dependencies>
 </project>
-
