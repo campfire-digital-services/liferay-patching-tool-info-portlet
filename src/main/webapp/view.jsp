@@ -1,19 +1,35 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
+ 
 <portlet:defineObjects />
+
+<%
+List<String> patchingToolInfoLines = new ArrayList<String>();
+
+if (portletSession.getAttribute("patchingToolInfoLines") != null) {
+	patchingToolInfoLines = (List<String>) portletSession.getAttribute("patchingToolInfoLines");
+}
+%>
+
+<div id="patching_tool_info_controls">
+<portlet:actionURL name="refreshPatchingToolInfoAction" var="refreshPatchingToolInfoActionURL"></portlet:actionURL>
+
+<aui:form action="<%= refreshPatchingToolInfoActionURL %>" method="post" name="fm">
+	<aui:button type="submit" value="Refresh" />
+</aui:form>
+</div>
+
+<hr>
 
 <div id="patching_tool_info_details">
 <%
-String shell = System.getProperty("env.SHELL", "/bin/bash");
-String command = System.getProperty("liferay.home") + "/patching-tool/patching-tool." + (shell.startsWith("/") ? "sh" : "bat") + " info";
-Process p = Runtime.getRuntime().exec(command, new String[0], new java.io.File(System.getProperty("liferay.home")));
-java.util.List<String> lines = org.apache.commons.io.IOUtils.readLines(p.getInputStream());
-p.waitFor();
-for (String line : lines) {
+for (String line : patchingToolInfoLines) {
 %>
 <%= line %> <br>
 <%
 }
 %>
 </div>
-
