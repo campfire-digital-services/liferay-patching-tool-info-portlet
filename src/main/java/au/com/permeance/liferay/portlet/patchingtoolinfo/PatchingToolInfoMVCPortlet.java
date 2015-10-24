@@ -1,7 +1,24 @@
+/**
+* Copyright (C) 2015-present by Permeance Technologies
+*
+* This program is free software: you can redistribute it and/or modify it under the terms of the
+* GNU General Public License as published by the Free Software Foundation, either version 3 of the
+* License, or (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+* even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+* General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License along with this program. If
+* not, see <http://www.gnu.org/licenses/>.
+*/
+
 package au.com.permeance.liferay.portlet.patchingtoolinfo;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.OSDetector;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.io.File;
@@ -22,7 +39,7 @@ import org.apache.commons.io.IOUtils;
 
 
 /**
- * Patching Tool Info MVC Portlet
+ * Patching Tool Info MVC Portlet.
  *
  * @author Terry Mueller <terry.mueller@permeance.com.au>
  * @author Tim Telcik <tim.telcik@permeance.com.au>
@@ -33,7 +50,16 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 	
 	private static final String PATCHING_TOOL_INFO_CACHE_KEY = "patchingToolInfo";
 	
-	// private List<String> patchingToolInfoLines = new ArrayList<String>();
+	private static final String MS_WINDOWS_SHELL_FILE_EXT = ".bat";
+	
+	private static final String UNIX_LINUX_SHELL_FILE_EXT = ".sh";
+	
+	private static final String PATCHING_TOOL_FOLDER_NAME = "patching-tool";
+	
+	private static final String PATCHING_TOOL_SCRIPT_BASE_NAME = "patching-tool";
+	
+	private static final String PATCHING_TOOL_INFO_ARG = "info";
+
 	private Map<String,Object> patchingToolInfoCache = new HashMap<String,Object>();
 	
 	
@@ -46,6 +72,7 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 			LOG.info("process view");
 		}
 
+		@SuppressWarnings("unchecked")
 		List<String> patchingToolInfoLines = (List<String>) patchingToolInfoCache.get(PATCHING_TOOL_INFO_CACHE_KEY);
 		if (patchingToolInfoLines == null || patchingToolInfoLines.isEmpty()) {
 			LOG.info("patching tool info cache is empty");
@@ -53,7 +80,7 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 			patchingToolInfoCache.put(PATCHING_TOOL_INFO_CACHE_KEY, patchingToolInfoLines);
 		} else {
 			if (LOG.isInfoEnabled()) {
-				LOG.info("patching tool info contains " + patchingToolInfoLines.size() + " lines");
+				LOG.info("patching tool info cache contains " + patchingToolInfoLines.size() + " lines");
 			}
 		}
 		
@@ -98,13 +125,13 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 		
 		try {
 			
-			String shell = System.getProperty("env.SHELL", "/bin/bash");
-			
-			String command = System.getProperty("liferay.home") + "/patching-tool/patching-tool." + (shell.startsWith("/") ? "sh" : "bat") + " info";
+			String liferayHomePath = System.getProperty("liferay.home");
+
+			String command = buildPatchingToolInfoQueryCommand();
 			
 			Runtime runtime = Runtime.getRuntime();
 			
-			Process process = runtime.exec(command, new String[0], new File(System.getProperty("liferay.home")));
+			Process process = runtime.exec(command, new String[0], new File(liferayHomePath));
 			
 			List<String> processLines = IOUtils.readLines(process.getInputStream());
 			
@@ -133,6 +160,38 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 		}
 		
 		return resultLines;
+	}
+	
+
+	private String buildPatchingToolInfoQueryCommand() throws Exception {
+		
+		String liferayHomePath = System.getProperty("liferay.home");
+
+		String shellScriptExt = StringPool.BLANK;
+		
+		if (OSDetector.isWindows()) {
+			shellScriptExt = MS_WINDOWS_SHELL_FILE_EXT;
+		} else {
+			shellScriptExt = UNIX_LINUX_SHELL_FILE_EXT;			
+		}
+		
+		String patchingToolScript = PATCHING_TOOL_SCRIPT_BASE_NAME + shellScriptExt;
+		
+		String patchingToolPath = liferayHomePath + File.separator + PATCHING_TOOL_FOLDER_NAME + File.separator + patchingToolScript;
+		
+		String patchingToolArg = PATCHING_TOOL_INFO_ARG;
+		
+		StringBuilder commandBuffer = new StringBuilder();
+		
+		commandBuffer.append(patchingToolPath);
+		
+		commandBuffer.append(StringPool.SPACE);
+		
+		commandBuffer.append(patchingToolArg);
+		
+		String command = commandBuffer.toString();
+		
+		return command;
 	}
 
 }
