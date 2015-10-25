@@ -2,12 +2,12 @@
 
 **liferay-patching-tool-info-portlet**
 
-The Liferay Patching Tool Info portlet captures details from the Liferay patching-tool and displays those details in the portlet view.
+The Liferay Patching Tool Info portlet display details from the Liferay Portal Enterprise Edition (EE) patching tool.
 
 
 ## Overview
 
-The Liferay Patching Tool Info portlet captures details from the Liferay patching-tool and displays those details in the portlet view.
+The Liferay Patching Tool Info portlet captures details from the Liferay Portal Enterprise Edition (EE) patching tool and displays those details in the portlet view.
 
 For example,
 
@@ -16,24 +16,23 @@ For example,
 
 These details can be useful to portal administrators when reviewing configuration and/or investigating portal issues.
 
+*NOTE: The patching tool is only available with Liferay Portal EE. Hence, the Liferay Patching Tool Info portlet is only available for Liferay Portal 6.1.x EE and 6.2.x EE.*
+
 
 ## Supported Products
 
 ### GitHub Project Master
 
-* Liferay Portal 6.1 CE : 6.1 CE GA2, GA3 (6.1.1+)
-* Liferay Portal 6.1 CE : 6.1 EE GA2, GA3 (6.1.20+)
+* Liferay Portal 6.1 EE : 6.1 EE GA2, GA3 (6.1.20+)
 
 *NOTE: master reflects branch 6.1.x*
 
 ### GitHub Project Branch 6.1.x
 
-* Liferay Portal 6.1 CE : 6.1 CE GA2, GA3 (6.1.1+)
-* Liferay Portal 6.1 CE : 6.1 EE GA2, GA3 (6.1.20+)
+* Liferay Portal 6.1 EE : 6.1 EE GA2, GA3 (6.1.20+)
 
 ### GitHub Project Branch 6.2.x
 
-* Liferay Portal 6.2 CE : 6.2 CE GA1 (6.2.0+)
 * Liferay Portal 6.2 EE : 6.2 EE GA1 (6.2.10+)
 
 
