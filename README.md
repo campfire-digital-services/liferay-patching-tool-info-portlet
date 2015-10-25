@@ -54,11 +54,11 @@ Deploy "liferay-patching-tool-info-portlet-A.B.C.war" to "LIFERAY_HOME/deploy" f
 
 #### Liferay Portal 6.1 EE Control Panel Home
 
-![LP 6.1 EE Control Panel Home](/docs/images/lp-6.1.x-control-panel-info-20151025-annot-800x620.jpg "LP 6.1 EE Control Panel Home")
+![LP 6.1 EE Control Panel Home](/docs/images/6.1.x/lp-6.1.x-control-panel-info-20151025-annot-800x620.jpg "LP 6.1 EE Control Panel Home")
 
 #### Liferay Portal 6.2 EE Control Panel Home
 
-![LP 6.2 EE Control Panel Home](/docs/images/lp-6.2.x-control-panel-info-20151025-annot-800x620.jpg "LP 6.2 EE Control Panel Home")
+![LP 6.2 EE Control Panel Home](/docs/images/6.2.x/lp-6.2.x-control-panel-info-20151025-annot-800x620.jpg "LP 6.2 EE Control Panel Home")
 
 
 ### Step 2. Navigate to Patching Tool Info portlet
@@ -71,11 +71,11 @@ Patching tool info details displayed in portlet view.
 
 #### Liferay Portal 6.1 EE Control Panel Patching Tool View
 
-![LP 6.1 EE Control Panel Patching Tool View](/docs/images/lp-6.1.x-control-panel-patching-tool-info-20151025-annot-800x620.jpg "LP 6.1 EE Control Panel Patching Tool View")
+![LP 6.1 EE Control Panel Patching Tool View](/docs/images/6.1.x/lp-6.1.x-control-panel-patching-tool-info-20151025-annot-800x620.jpg "LP 6.1 EE Control Panel Patching Tool View")
 
 #### Liferay Portal 6.2 EE Control Panel Patching Tool View
 
-![LP 6.2 EE Control Panel Patching Tool View](/docs/images/lp-6.2.x-control-panel-patching-tool-info-20151025-annot-800x620.jpg "LP 6.2 EE Control Panel Patching Tool View")
+![LP 6.2 EE Control Panel Patching Tool View](/docs/images/6.2.x/lp-6.2.x-control-panel-patching-tool-info-20151025-annot-800x620.jpg "LP 6.2 EE Control Panel Patching Tool View")
 
 
 ### Step 4. Refresh patching tool info details.
