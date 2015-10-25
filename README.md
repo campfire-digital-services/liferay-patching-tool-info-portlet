@@ -9,22 +9,29 @@ The Liferay Patching Tool Info portlet captures details from the Liferay patchin
 
 The Liferay Patching Tool Info portlet captures details from the Liferay patching-tool and displays those details in the portlet view.
 
-These details can be usefui to portal administrators when reviewing configuration and/or investigating portal issues.
+For example,
+
+    % patching-tool info
+
+
+These details can be useful to portal administrators when reviewing configuration and/or investigating portal issues.
 
 
 ## Supported Products
 
-### GitLab Project Master (6.1.x)
+### GitHub Project Master
 
 * Liferay Portal 6.1 CE : 6.1 CE GA2, GA3 (6.1.1+)
 * Liferay Portal 6.1 CE : 6.1 EE GA2, GA3 (6.1.20+)
 
-### GitLab Project Branch 6.1.x
+*NOTE: master reflects branch 6.1.x*
+
+### GitHub Project Branch 6.1.x
 
 * Liferay Portal 6.1 CE : 6.1 CE GA2, GA3 (6.1.1+)
 * Liferay Portal 6.1 CE : 6.1 EE GA2, GA3 (6.1.20+)
 
-### GitLab Project Branch 6.2.x
+### GitHub Project Branch 6.2.x
 
 * Liferay Portal 6.2 CE : 6.2 CE GA1 (6.2.0+)
 * Liferay Portal 6.2 EE : 6.2 EE GA1 (6.2.10+)
@@ -61,13 +68,13 @@ Click "Refresh" button.
 
 ## Building
 
-### Step 1. Checkout source from GitLab project
+### Step 1. Checkout source from GitHub project
 
-#### Step 1.1. Checkout master or branch from GitLab project
+Checkout master or branch from GitHub project
 
 eg. Checkout master
 
-    $ git clone https://gitlab.permeance.com.au/permeance-liferay-marketplace/liferay-patching-tool-info-portlet.git
+    $ git clone https://github.com/permeance/liferay-patching-tool-info-portlet.git
     Cloning into 'liferay-patching-tool-info-portlet'...
     . . .
     $ git status
@@ -75,7 +82,7 @@ eg. Checkout master
 
 eg. Checkout branch 6.1.x
 
-    $ git clone https://gitlab.permeance.com.au/permeance-liferay-marketplace/liferay-patching-tool-info-portlet.git
+    $ git clone https://github.com/permeance/liferay-patching-tool-info-portlet.git
     Cloning into 'liferay-patching-tool-info-portlet'...
     . . .
     $ cd liferay-patching-tool-info-portlet
@@ -90,7 +97,7 @@ eg. Checkout branch 6.1.x
 
 eg. Checkout branch 6.2.x
 
-    $ git clone https://gitlab.permeance.com.au/permeance-liferay-marketplace/liferay-patching-tool-info-portlet.git
+    $ git clone https://github.com/permeance/liferay-patching-tool-info-portlet.git
     Cloning into 'liferay-patching-tool-info-portlet'...
     . . .
     $ cd liferay-patching-tool-info-portlet
@@ -105,11 +112,18 @@ eg. Checkout branch 6.2.x
 
 ### Step 2. Build and package
 
+Build "liferay-patching-tool-info-portlet-A.B.C.war" in the "targets" folder.
+
     % mvn -U clean package
 
-This will build "liferay-patching-tool-info-portlet-A.B.C.war" in the "targets" folder.
 
-*NOTE: You will require JDK 1.7+ and Maven 3.*
+## Dependencies
+
+Building this project source requires the following tools:
+
+* Oracle JDK 1.7+ 
+ * NOTE: Not tested with OpenJDK 1.7+
+* Apache Maven 3.2.x+
 
 
 ## Authors
