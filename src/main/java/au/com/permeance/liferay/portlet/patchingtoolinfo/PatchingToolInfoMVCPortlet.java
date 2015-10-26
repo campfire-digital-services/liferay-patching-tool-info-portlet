@@ -24,6 +24,7 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 	
 	private static final String UNIX_LINUX_SHELL_FILE_EXT = ".sh";
 	
-	private static final String PATCHING_TOOL_FOLDER_NAME = "patching-tool";
+	private static final String PATCHING_TOOL_HOME_FOLDER_NAME = "patching-tool";
 	
 	private static final String PATCHING_TOOL_SCRIPT_BASE_NAME = "patching-tool";
 	
@@ -69,19 +70,24 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 		throws IOException, PortletException {
 		
 		if (LOG.isInfoEnabled()) {
-			LOG.info("process view");
+			LOG.info("process view ...");
 		}
 
 		@SuppressWarnings("unchecked")
 		List<String> patchingToolInfoLines = (List<String>) patchingToolInfoCache.get(PATCHING_TOOL_INFO_CACHE_KEY);
+
 		if (patchingToolInfoLines == null || patchingToolInfoLines.isEmpty()) {
+
 			LOG.info("patching tool info cache is empty");
 			patchingToolInfoLines = queryPatchingToolInfo();
 			patchingToolInfoCache.put(PATCHING_TOOL_INFO_CACHE_KEY, patchingToolInfoLines);
+
 		} else {
+			
 			if (LOG.isInfoEnabled()) {
 				LOG.info("patching tool info cache contains " + patchingToolInfoLines.size() + " lines");
 			}
+
 		}
 		
 		if (LOG.isInfoEnabled()) {
@@ -125,34 +131,13 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 		
 		try {
 			
-			String liferayHomePath = System.getProperty("liferay.home");
-
-			String command = buildPatchingToolInfoQueryCommand();
-			
-			Runtime runtime = Runtime.getRuntime();
-			
-			Process process = runtime.exec(command, new String[0], new File(liferayHomePath));
-			
-			List<String> processLines = IOUtils.readLines(process.getInputStream());
-			
-			process.waitFor();
-			
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("patching tool info process returned " + processLines.size() + " lines");
-			}
-			
-			resultLines.addAll(processLines);
-			
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("patching tool info result contains " + processLines.size() + " lines");
-			}
-			
+			resultLines = runPatchingToolCommand();
+						
 		} catch (Exception e) {
 			
-			String msg = "Error querying patching tool info: " + e.getMessage();
+			String msg = "Error querying patching tool info : " + e.getMessage();
 			LOG.error(msg, e);
 			throw new PortletException(msg, e);
-			
 		}
 		
 		if (LOG.isInfoEnabled()) {
@@ -162,11 +147,111 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 		return resultLines;
 	}
 	
+	
+	private List<String> runPatchingToolCommand() throws Exception {
+		
+		if (LOG.isInfoEnabled()) {
+			LOG.info("running patching tool command ...");
+		}
+		
+		List<String> resultLines = new ArrayList<String>();
+		
+		List<String> stdoutLines = Collections.emptyList();
+		
+		List<String> stderrLines = Collections.emptyList();	
 
-	private String buildPatchingToolInfoQueryCommand() throws Exception {
+		try {
+
+			ProcessBuilder processBuilder = configureProcessBuilder();
+			
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("processBuilder : " + processBuilder);				
+				List<String> commandList = processBuilder.command();
+				LOG.debug("command list : " + commandList);				
+				LOG.debug("command directory : " + processBuilder.directory());				
+				LOG.debug("command environment : " + processBuilder.environment());				
+			}
+			
+			if (LOG.isInfoEnabled()) {
+				String processCommandStr = buildProcessCommandString(processBuilder);
+				LOG.info("running command : " + processCommandStr);
+			}
+
+			Process process = processBuilder.start();
+			
+			process.waitFor();
+			
+			stdoutLines = IOUtils.readLines(process.getInputStream());
+			
+			stderrLines = IOUtils.readLines(process.getErrorStream());	
+
+			if (LOG.isInfoEnabled()) {
+				LOG.info("patching tool process returned " + stdoutLines.size() + " output lines");
+				LOG.info("--- COMMAND OUTPUT ---");
+				LOG.info(stdoutLines);
+				LOG.info("patching tool process returned " + stderrLines.size() + " error lines");
+				LOG.info("--- COMMAND ERROR ---");				
+				LOG.info(stderrLines);
+			}
+
+			resultLines.addAll(stdoutLines);
+			
+		} catch (Exception e) {
+			
+			String msg = "Error running patching tool command : " + e.getMessage();
+			LOG.error(msg, e);
+			throw new Exception(msg, e);
+			
+		}
+		
+		if (LOG.isInfoEnabled()) {
+			LOG.info("patching tool command returned " + resultLines.size() + " lines");
+		}
+		
+		return resultLines;
+	}	
+	
+	
+	private ProcessBuilder configureProcessBuilder() throws Exception {
 		
 		String liferayHomePath = System.getProperty("liferay.home");
+		
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("liferayHomePath : " + liferayHomePath);
+		}
+		
+		String patchingToolHomePath = liferayHomePath + File.separator + PATCHING_TOOL_HOME_FOLDER_NAME;
+		
+		File patchingToolHomeDir = new File(patchingToolHomePath);
+		
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("patchingToolHomeDir : " + patchingToolHomeDir);
+		}
+		
+		String patchingToolScriptName = buildPatchingToolScriptName();
+		
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("patchingToolScriptName : " + patchingToolScriptName);
+		}
+		
+		ProcessBuilder pb = new ProcessBuilder(patchingToolScriptName, PATCHING_TOOL_INFO_ARG);
+		
+		pb.directory(patchingToolHomeDir);
+		
+		Map<String, String> processEnv = pb.environment();
+		
+		processEnv.clear();
+		
+		Map<String, String> systemEnvMap = System.getenv(); 
+		
+		processEnv.putAll(systemEnvMap);
 
+		return pb;
+	}
+	
+
+	private String buildPatchingToolScriptName() throws Exception {
+		
 		String shellScriptExt = StringPool.BLANK;
 		
 		if (OSDetector.isWindows()) {
@@ -175,23 +260,42 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 			shellScriptExt = UNIX_LINUX_SHELL_FILE_EXT;			
 		}
 		
-		String patchingToolScript = PATCHING_TOOL_SCRIPT_BASE_NAME + shellScriptExt;
+		String patchingToolScriptName = PATCHING_TOOL_SCRIPT_BASE_NAME + shellScriptExt;
 		
-		String patchingToolPath = liferayHomePath + File.separator + PATCHING_TOOL_FOLDER_NAME + File.separator + patchingToolScript;
-		
-		String patchingToolArg = PATCHING_TOOL_INFO_ARG;
-		
-		StringBuilder commandBuffer = new StringBuilder();
-		
-		commandBuffer.append(patchingToolPath);
-		
-		commandBuffer.append(StringPool.SPACE);
-		
-		commandBuffer.append(patchingToolArg);
-		
-		String command = commandBuffer.toString();
+		String command = patchingToolScriptName;
 		
 		return command;
+	}	
+	
+	
+	private String buildProcessCommandString(ProcessBuilder processBuilder) throws Exception {
+		
+		String processCommandStr = StringPool.BLANK;
+		
+		if (processBuilder != null) {
+			List<String> commandList = processBuilder.command();
+			File commandDir = processBuilder.directory();
+			String commandStr = toString(commandList);
+			processCommandStr = commandDir + File.separator + commandStr;
+		}
+		
+		return processCommandStr;
+	}
+
+	private String toString(List<?> list) {
+		return toString(list, StringPool.SPACE);
+	}
+
+	
+	private String toString(List<?> list, String itemSep) {
+		if (itemSep == null) {
+		}
+		StringBuilder sb = new StringBuilder();
+		for (Object item : list) {
+			sb.append(item.toString());
+			sb.append(itemSep);
+		}
+		return sb.toString();
 	}
 
 }

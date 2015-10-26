@@ -45,7 +45,8 @@ if (portletSession.getAttribute("patchingToolInfoLines") != null) {
 <%
 for (String line : patchingToolInfoLines) {
 %>
-<%= line %> <br>
+<%= line %>
+<br>
 <%
 }
 %>
