@@ -15,41 +15,59 @@
 */
 --%>
 
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="java.util.List"%>
-
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
+<%@ include file="/init.jsp" %>
  
-<portlet:defineObjects />
-
 <%
 List<String> patchingToolInfoLines = new ArrayList<String>();
 
-if (portletSession.getAttribute("patchingToolInfoLines") != null) {
-	patchingToolInfoLines = (List<String>) portletSession.getAttribute("patchingToolInfoLines");
+if (portletSession.getAttribute(PortletConstants.SESSION_KEY_PATCHING_TOOL_INFO_LINES) != null) {
+	patchingToolInfoLines = (List<String>) portletSession.getAttribute(PortletConstants.SESSION_KEY_PATCHING_TOOL_INFO_LINES);	
 }
+
+/*
+String lineSep = System.lineSeparator();
+List<String> newPatchingToolInfoLines = StringUtilsHelper.strip(patchingToolInfoLines, lineSep); 
+patchingToolInfoLines = newPatchingToolInfoLines;
+*/
+
+request.setAttribute("patchingToolInfoLines", patchingToolInfoLines);
 %>
 
 <div id="patching_tool_info_controls">
-<portlet:actionURL name="refreshPatchingToolInfoAction" var="refreshPatchingToolInfoActionURL"></portlet:actionURL>
+<portlet:actionURL name="refreshAction" var="refreshActionURL"></portlet:actionURL>
 
-<aui:form action="<%= refreshPatchingToolInfoActionURL %>" method="post" name="fm">
+<aui:form action="<%= refreshActionURL %>" method="post" name="fm">
 	<aui:button type="submit" value="Refresh" />
 </aui:form>
 </div>
 
 <hr>
 
+<%--
 <div id="patching_tool_info_details">
-<%
-for (String line : patchingToolInfoLines) {
-%>
+<pre>
+<% for (String line : patchingToolInfoLines) { %>
 <%= line %>
+<% } %>
 <br>
-<%
-}
-%>
+</pre>
+</div>
+ --%>
+
+<%--
+<div id="patching_tool_info_details">
+<pre>
+<c:forEach items="${patchingToolInfoLines}" var="line">
+   <c:out value="${line}"/>
+</c:forEach>
+</pre>
+</div>
+--%>
+
+<div id="patching_tool_info_details">
+<c:forEach items="${patchingToolInfoLines}" var="line">
+   <c:out value="${line}"/> <br>
+</c:forEach>
 </div>
 
 <hr>
