@@ -47,7 +47,7 @@ public class PatchingToolCommandRunner {
 	private static final String MS_WINDOWS_SHELL_NAME = "cmd";
 	
 	private static final String MS_WINDOWS_SHELL_OPTION = "/c";
-	
+
 	private static final String UNIX_LINUX_SHELL_NAME = "/bin/sh";
 	
 	private static final String UNIX_LINUX_SHELL_OPTION = "-l";
@@ -57,9 +57,7 @@ public class PatchingToolCommandRunner {
 	private static final String PATCHING_TOOL_SCRIPT_BASE_NAME = "patching-tool";
 	
 	private static final String SYS_PROP_KEY_LIFERAY_HOME = "liferay.home"; 
-	
-	// private static final String DEFAULT_PATCHING_TOOL_INFO_OPTION = "info";
-	
+
 	private List<String> commandOutputLines = Collections.emptyList();
 	
 	private List<String> commandErrorLines = Collections.emptyList();	
@@ -117,7 +115,7 @@ public class PatchingToolCommandRunner {
 		this.commandErrorLines = Collections.emptyList();	
 
 		try {
-
+			
 			ProcessBuilder processBuilder = configureProcessBuilder();
 			
 			if (LOG.isDebugEnabled()) {
@@ -129,22 +127,21 @@ public class PatchingToolCommandRunner {
 			}
 			
 			if (LOG.isInfoEnabled()) {
-				// String processCommandStr = ProcessBuilderHelper.buildProcessCommandString(processBuilder);
 				List<String> commandList = processBuilder.command();
 				String processCommandStr = StringHelper.flattenStringList( commandList );
 				LOG.info("running command : " + processCommandStr);
 			}
 
 			Process process = processBuilder.start();
-			
-			this.commandOutputLines = IOUtils.readLines(process.getInputStream());
-			
-			this.commandErrorLines = IOUtils.readLines(process.getErrorStream());	
-			
+
 			// NOTE: Java 1.8 supports Process#waitFor with a timeout
 			// eg. boolean finished = iostat.waitFor(100, TimeUnit.MILLISECONDS);
 			
 			processExitValue = process.waitFor();
+			
+			this.commandOutputLines = IOUtils.readLines(process.getInputStream());
+			
+			this.commandErrorLines = IOUtils.readLines(process.getErrorStream());	
 			
 			if (LOG.isInfoEnabled()) {
 				LOG.info("patching tool process returned exit code " + processExitValue );
@@ -198,7 +195,7 @@ public class PatchingToolCommandRunner {
 		String liferayHomePath = System.getProperty( SYS_PROP_KEY_LIFERAY_HOME );
 		
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("liferayHomePath : " + liferayHomePath);
+			LOG.debug(SYS_PROP_KEY_LIFERAY_HOME + " : " + liferayHomePath);
 		}
 		
 		if ( liferayHomePath == null ) {
@@ -214,13 +211,35 @@ public class PatchingToolCommandRunner {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("patchingToolHomeDir : " + patchingToolHomeDir);
 		}
-
-		String patchingToolScriptPath = buildPatchingToolScriptName();
 		
-		// String patchingToolScriptPath = patchingToolHomePath + File.separator + buildPatchingToolScriptName();
+		if (!patchingToolHomeDir.exists()) {
+			String msg = "Patching tool home folder does not exist : " + patchingToolHomeDir.getAbsolutePath();
+			LOG.error(msg);
+			throw new Exception(msg);
+		}
+
+		String patchingToolScriptName = buildPatchingToolScriptName();
+
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("patchingToolScriptName : " + patchingToolScriptName);
+		}
+
+		String patchingToolScriptPath = patchingToolHomePath + File.separator + buildPatchingToolScriptName();
 		
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("patchingToolScriptPath : " + patchingToolScriptPath);
+		}
+		
+		File patchingToolScriptFile = new File(patchingToolScriptPath);
+		
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("patchingToolScriptFile : " + patchingToolScriptFile);
+		}
+		
+		if (!patchingToolScriptFile.exists()) {
+			String msg = "Patching tool script does not exist : " + patchingToolScriptFile.getAbsolutePath();
+			LOG.error(msg);
+			throw new Exception(msg);
 		}
 		
 		List<String> commandList = new ArrayList<String>();
@@ -233,7 +252,7 @@ public class PatchingToolCommandRunner {
 
 		commandList.addAll(shellCommand);
 		
-		commandList.add(patchingToolScriptPath);
+		commandList.add(patchingToolScriptName);
 
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("patchingToolOptions : " + getPatchingToolOptions());
@@ -251,13 +270,12 @@ public class PatchingToolCommandRunner {
 		
 		pb.directory( patchingToolHomeDir );
 
-		// ProcessBuilder#environent is initialised with System.getenv()
+		// NOTE: ProcessBuilder#environent is initialised with System.getenv()
 		// @see http://docs.oracle.com/javase/7/docs/api/java/lang/ProcessBuilder.html#environment%28%29
 
-		Map<String, String> pbEnv = pb.environment();
-		
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("pbEnv : " + pbEnv);
+			Map<String, String> environment = pb.environment();
+			LOG.debug("environment : " + environment);
 		}
 		
 		return pb;
