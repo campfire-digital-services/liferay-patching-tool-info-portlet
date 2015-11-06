@@ -18,57 +18,69 @@
 <%@ include file="/init.jsp" %>
  
 <%
-List<String> patchingToolInfoLines = new ArrayList<String>();
+PatchingToolResults patchingToolResults = new PatchingToolResults();
+int patchingToolExitValue = 0;
+List<String> patchingToolOutputLines = new ArrayList<String>();
+List<String> patchingToolErrorLines = new ArrayList<String>();
 
-if (portletSession.getAttribute(PortletConstants.SESSION_KEY_PATCHING_TOOL_INFO_LINES) != null) {
-	patchingToolInfoLines = (List<String>) portletSession.getAttribute(PortletConstants.SESSION_KEY_PATCHING_TOOL_INFO_LINES);	
+if (portletSession.getAttribute(PortletKeys.SESSION_KEY_PATCHING_TOOL_RESULTS) != null) {
+	patchingToolResults = (PatchingToolResults) portletSession.getAttribute(PortletKeys.SESSION_KEY_PATCHING_TOOL_RESULTS);
+	patchingToolExitValue = patchingToolResults.getExitValue();
+	patchingToolOutputLines = patchingToolResults.getOutputLines();
+	patchingToolErrorLines = patchingToolResults.getErrorLines();
 }
 
 /*
 String lineSep = System.lineSeparator();
-List<String> newPatchingToolInfoLines = StringUtilsHelper.strip(patchingToolInfoLines, lineSep); 
-patchingToolInfoLines = newPatchingToolInfoLines;
+List<String> newPatchingToolInfoLines = StringUtilsHelper.strip(patchingToolOutputLines, lineSep); 
+patchingToolOutputLines = newPatchingToolInfoLines;
 */
 
-request.setAttribute("patchingToolInfoLines", patchingToolInfoLines);
+request.setAttribute("patchingToolOutputLines", patchingToolOutputLines);
+request.setAttribute("patchingToolErrorLines", patchingToolErrorLines);
 %>
 
-<div id="patching_tool_info_controls">
-<portlet:actionURL name="refreshAction" var="refreshActionURL"></portlet:actionURL>
+<c:if test="${empty patchingToolOutputLines}">
+<liferay-ui:success key="success" message="patching-tool-has-no-results" />
+</c:if>
 
-<aui:form action="<%= refreshActionURL %>" method="post" name="fm">
-	<aui:button type="submit" value="Refresh" />
-</aui:form>
+<c:if test="${not empty patchingToolOutputLines}">
+<div id="patching_tool_controls">
+   <portlet:actionURL name="refreshAction" var="refreshActionURL"></portlet:actionURL>
+
+   <aui:form action="<%= refreshActionURL %>" method="post" name="fm">
+	   <aui:button type="submit" value="Refresh" />
+   </aui:form>
 </div>
-
-<hr>
+</c:if>
 
 <%--
-<div id="patching_tool_info_details">
+<div id="patching_tool_output_lines">
 <pre>
-<% for (String line : patchingToolInfoLines) { %>
-<%= line %>
-<% } %>
-<br>
-</pre>
-</div>
- --%>
-
-<%--
-<div id="patching_tool_info_details">
-<pre>
-<c:forEach items="${patchingToolInfoLines}" var="line">
-   <c:out value="${line}"/>
-</c:forEach>
+   <c:forEach items="${patchingToolOutputLines}" var="line">
+      <c:out value="${line}"/>
+   </c:forEach>
 </pre>
 </div>
 --%>
 
-<div id="patching_tool_info_details">
-<c:forEach items="${patchingToolInfoLines}" var="line">
-   <c:out value="${line}"/> <br>
-</c:forEach>
+<c:if test="${not empty patchingToolOutputLines}">
+<hr>
+<div id="patching_tool_output_lines">
+   <c:forEach items="${patchingToolOutputLines}" var="line">
+      <c:out value="${line}"/> <br>
+   </c:forEach>
 </div>
+</c:if>
+
+<c:if test="${not empty patchingToolErrorLines}">
+<hr>
+<div id="patching_tool_error_lines">
+   <c:forEach items="${patchingToolErrorLines}" var="line">
+      <c:out value="${line}"/> <br>
+   </c:forEach>
+</div>
+</c:if>
 
 <hr>
 

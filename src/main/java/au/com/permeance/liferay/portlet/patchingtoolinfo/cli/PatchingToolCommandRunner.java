@@ -24,9 +24,7 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 
@@ -57,12 +55,10 @@ public class PatchingToolCommandRunner {
 	private static final String PATCHING_TOOL_SCRIPT_BASE_NAME = "patching-tool";
 	
 	private static final String SYS_PROP_KEY_LIFERAY_HOME = "liferay.home"; 
-
-	private List<String> commandOutputLines = Collections.emptyList();
-	
-	private List<String> commandErrorLines = Collections.emptyList();	
 	
 	private List<String> patchingToolOptions = new ArrayList<String>();
+	
+	private PatchingToolResults patchingToolResults = new PatchingToolResults();	
 	
 
 	public PatchingToolCommandRunner() {
@@ -82,48 +78,30 @@ public class PatchingToolCommandRunner {
 	}
 	
 	
-	public List<String> getCommandOutputLines() {
-		return this.commandOutputLines;
-	}
-	
-	
-	public boolean hasOutputLines() {
-		return (!getCommandOutputLines().isEmpty());
-	}
-	
-
-	public List<String> getCommandErrorLines() {
-		return this.commandErrorLines;
-	}
-	
-	
-	public boolean hasErrorLines() {
-		return (!getCommandErrorLines().isEmpty());
+	public PatchingToolResults getPatchingToolResults() {
+		return patchingToolResults;
 	}
 
-	
+
 	public void runCommand() throws Exception {
 		
 		if (LOG.isInfoEnabled()) {
 			LOG.info("running patching tool command ...");
 		}
 
-		int processExitValue = 0;
-		
-		this.commandOutputLines = Collections.emptyList();
-		
-		this.commandErrorLines = Collections.emptyList();	
-
 		try {
 			
 			ProcessBuilder processBuilder = configureProcessBuilder();
 			
+			// NOTE: ProcessBuilder#environent is initialised with System.getenv()
+			// @see http://docs.oracle.com/javase/7/docs/api/java/lang/ProcessBuilder.html#environment%28%29
+			
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("processBuilder : " + processBuilder);				
 				List<String> commandList = processBuilder.command();
-				LOG.debug("command list : " + commandList);				
-				LOG.debug("command directory : " + processBuilder.directory());				
-				LOG.debug("command environment : " + processBuilder.environment());				
+				LOG.debug("command environment : " + processBuilder.environment());
+				LOG.debug("command list : " + commandList);
+				LOG.debug("command directory : " + processBuilder.directory());
 			}
 			
 			if (LOG.isInfoEnabled()) {
@@ -133,29 +111,45 @@ public class PatchingToolCommandRunner {
 			}
 
 			Process process = processBuilder.start();
+			
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("process : " + process);				
+			}			
 
 			// NOTE: Java 1.8 supports Process#waitFor with a timeout
 			// eg. boolean finished = iostat.waitFor(100, TimeUnit.MILLISECONDS);
+
+			int processExitValue = process.waitFor();
+
+			List<String> processOutputLines = IOUtils.readLines( process.getInputStream() );
+
+			List<String> processErrorLines = IOUtils.readLines( process.getErrorStream() );	
 			
-			processExitValue = process.waitFor();
+			this.patchingToolResults = new PatchingToolResults( processExitValue, processOutputLines, processErrorLines );
 			
-			this.commandOutputLines = IOUtils.readLines(process.getInputStream());
-			
-			this.commandErrorLines = IOUtils.readLines(process.getErrorStream());	
-			
-			if (LOG.isInfoEnabled()) {
-				LOG.info("patching tool process returned exit code " + processExitValue );
-				LOG.info("patching tool process returned " + commandOutputLines.size() + " output lines");
-				LOG.info("--- COMMAND OUTPUT ---");
-				LOG.info(commandOutputLines);
-				LOG.info("patching tool process returned " + commandErrorLines.size() + " error lines");
-				LOG.info("--- COMMAND ERROR ---");				
-				LOG.info(commandErrorLines);
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("patchingToolResults: " + patchingToolResults);
 			}
 			
-			if ((processExitValue != 0) || (hasErrorLines())) {
+			if (LOG.isInfoEnabled()) {
+				LOG.info("patching tool returned exit code " + this.patchingToolResults.getExitValue() );
+				LOG.info("patching tool returned " + this.patchingToolResults.getOutputLines().size() + " output lines");
+				LOG.info("--- COMMAND OUTPUT ---");
+				LOG.info(processOutputLines);
+				LOG.info("patching tool returned " + this.patchingToolResults.getErrorLines().size() + " error lines");
+				LOG.info("--- COMMAND ERROR ---");				
+				LOG.info(processErrorLines);
+			}
+			
+			// NOTE: Command shell may return lines in the error stream that are warning messages, not errors.
+			// Hence, we cannot rely upon content in the error stream as a valid error.
+			
+			if (this.patchingToolResults.getExitValue() != 0) {
 				StringBuilder sb = new StringBuilder();
-				String errorLine1 = getCommandErrorLines().get(0);
+				String errorLine1 = null;
+				if (this.patchingToolResults.hasErrorLines()) {
+					errorLine1 = this.patchingToolResults.getErrorLines().get(0);
+				}
 				if (errorLine1 == null) {
 					sb.append("Error running patching tool command.");
 					sb.append(" See portal logs for more details.");
@@ -169,23 +163,9 @@ public class PatchingToolCommandRunner {
 
 		} catch (Exception e) {
 			
-			LOG.error("patching tool process returned exit code " + processExitValue);
-			LOG.error("patching tool process returned " + commandErrorLines.size() + " error lines");
-			LOG.error("--- COMMAND ERROR ---");				
-			LOG.error(getCommandErrorLines());
-			
-			String msg = "Error running patching tool command : " + e.getMessage();
+			String msg = "Error executing patching tool command : " + e.getMessage();
 			LOG.error(msg, e);
 			throw new Exception(msg, e);
-			
-		}
-		
-		if (LOG.isInfoEnabled()) {
-			StringBuilder sb = new StringBuilder();
-			sb.append("patching tool command returned " + getCommandOutputLines().size() + " output lines");
-			sb.append(" and " + getCommandErrorLines().size() + " error lines");
-			String msg = sb.toString();
-			LOG.info(msg);
 		}
 	}
 	
@@ -250,9 +230,9 @@ public class PatchingToolCommandRunner {
 			LOG.debug("shellCommand : " + shellCommand);
 		}
 
-		commandList.addAll(shellCommand);
+		commandList.addAll( shellCommand );
 		
-		commandList.add(patchingToolScriptName);
+		commandList.add( patchingToolScriptName );
 
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("patchingToolOptions : " + getPatchingToolOptions());
@@ -270,14 +250,6 @@ public class PatchingToolCommandRunner {
 		
 		pb.directory( patchingToolHomeDir );
 
-		// NOTE: ProcessBuilder#environent is initialised with System.getenv()
-		// @see http://docs.oracle.com/javase/7/docs/api/java/lang/ProcessBuilder.html#environment%28%29
-
-		if (LOG.isDebugEnabled()) {
-			Map<String, String> environment = pb.environment();
-			LOG.debug("environment : " + environment);
-		}
-		
 		return pb;
 	}
 	
