@@ -9,11 +9,21 @@ The Liferay Patching Tool Info portlet display details from the Liferay Portal E
 
 The Liferay Patching Tool Info portlet captures details from the Liferay Portal Enterprise Edition (EE) patching tool and displays those details in the portlet view.
 
+### Sample Command Shell Usage
+
 Similar patching details can be seen by running the patching tool at the command line.
 
-For example,
+#### Running patching tool in Microsoft Windows command shell
 
-    % patching-tool info
+    > cd %LIFERAY_HOME%
+    > cd patching-tool
+    > patching-tool.bat info
+
+#### Running patching tool in Unix or Linux shell
+    
+    > cd $LIFERAY_HOME
+    % cd patching-tool
+    % patching-tool.sh info
 
 
 The patching details can be useful to portal administrators when reviewing configuration and/or submitting support requests.
@@ -23,24 +33,21 @@ The patching details can be useful to portal administrators when reviewing confi
 
 ## Supported Products
 
-### GitHub Project Master
-
-* Liferay Portal 6.1 EE : 6.1 EE GA2, GA3 (6.1.20+)
+### Liferay Portal 6.1 EE : 6.1 EE GA2, GA3 (6.1.20+)
+* See GitHub Project Master
 
 *NOTE: master reflects branch 6.1.x*
 
-### GitHub Project Branch 6.1.x
+### Liferay Portal 6.1 EE : 6.1 EE GA2, GA3 (6.1.20+)
+* GitHub Project Branch 6.1.x
 
-* Liferay Portal 6.1 EE : 6.1 EE GA2, GA3 (6.1.20+)
-
-### GitHub Project Branch 6.2.x
-
-* Liferay Portal 6.2 EE : 6.2 EE GA1 (6.2.10+)
+### Liferay Portal 6.2 EE : 6.2 EE GA1 (6.2.10+)
+* GitHub Project Branch 6.2.x
 
 
 ## Downloads
 
-TODO
+* [SourceForge - Liferay Patching Tool Info Portlet](https://sourceforge.net/projects/permeance-apps/files/liferay-patching-tool-info-portlet/ "Liferay Patching Tool Info Portlet")
 
 
 ## Installation
@@ -91,7 +98,7 @@ Click "Refresh" button.
 
 Checkout master or branch from GitHub project
 
-eg. Checkout master
+eg. Checkout master - Liferay Portal 6.1.20+
 
     $ git clone https://github.com/permeance/liferay-patching-tool-info-portlet.git
     Cloning into 'liferay-patching-tool-info-portlet'...
@@ -99,7 +106,7 @@ eg. Checkout master
     $ git status
     On branch master
 
-eg. Checkout branch 6.1.x
+eg. Checkout branch 6.1.x - Liferay Portal 6.1.20+
 
     $ git clone https://github.com/permeance/liferay-patching-tool-info-portlet.git
     Cloning into 'liferay-patching-tool-info-portlet'...
@@ -114,7 +121,7 @@ eg. Checkout branch 6.1.x
     * 6.1.x
       master
 
-eg. Checkout branch 6.2.x
+eg. Checkout branch 6.2.x - Liferay Portal 6.2.10+
 
     $ git clone https://github.com/permeance/liferay-patching-tool-info-portlet.git
     Cloning into 'liferay-patching-tool-info-portlet'...
