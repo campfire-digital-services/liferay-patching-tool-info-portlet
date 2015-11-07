@@ -123,7 +123,7 @@ public class PatchingToolCommandRunner {
 
 			List<String> processOutputLines = IOUtils.readLines( process.getInputStream() );
 
-			List<String> processErrorLines = IOUtils.readLines( process.getErrorStream() );	
+			List<String> processErrorLines = IOUtils.readLines( process.getErrorStream() );
 			
 			this.patchingToolResults = new PatchingToolResults( processExitValue, processOutputLines, processErrorLines );
 			
