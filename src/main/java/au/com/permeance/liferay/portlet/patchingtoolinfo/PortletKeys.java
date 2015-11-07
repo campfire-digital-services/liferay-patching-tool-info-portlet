@@ -21,8 +21,14 @@ package au.com.permeance.liferay.portlet.patchingtoolinfo;
  *
  * @author Tim Telcik <tim.telcik@permeance.com.au>
  */
-public interface PortletConstants {
+public interface PortletKeys {
 
-	public static final String SESSION_KEY_PATCHING_TOOL_INFO_LINES = "patchingToolInfoLines";
+	public static final String SESSION_KEY_PATCHING_TOOL_RESULTS = "patchingToolResults";
+	
+	public static final String REQUEST_KEY_PATCHING_TOOL_ERROR_TYPE = "patchingToolErrorType";
+	
+	public static final String REQUEST_KEY_PATCHING_TOOL_ERROR_MESSAGE = "patchingToolErrorMessage";
+	
+	public static final String REQUEST_KEY_PATCHING_TOOL_ERROR_EXCEPTION = "patchingToolErrorException";
 	
 }

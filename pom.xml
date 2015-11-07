@@ -6,7 +6,7 @@
 	<groupId>au.com.permeance.liferay</groupId>
 	<artifactId>liferay-patching-tool-info-portlet</artifactId>
 	<packaging>war</packaging>
-	<version>0.5-SNAPSHOT</version>
+	<version>0.6-SNAPSHOT</version>
 	
 	<properties>
 		<commons-io.version>2.1</commons-io.version>

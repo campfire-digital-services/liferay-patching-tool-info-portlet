@@ -16,9 +16,12 @@
 package au.com.permeance.liferay.portlet.patchingtoolinfo;
 
 import au.com.permeance.liferay.portlet.patchingtoolinfo.cli.PatchingToolCommandRunner;
+import au.com.permeance.liferay.portlet.patchingtoolinfo.cli.PatchingToolResults;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.io.IOException;
@@ -42,19 +45,21 @@ import javax.portlet.RenderResponse;
  * @author Tim Telcik <tim.telcik@permeance.com.au>
  * 
  * @see MVCPortlet
+ * @see PatchingToolCommandRunner
+ * @see PatchingToolResults
  */
 public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 	
 	private static final Log LOG = LogFactoryUtil.getLog(PatchingToolInfoMVCPortlet.class);
 
-	private static final String ERROR_TEMPLATE_PATH = "/error.jsp";
+	private static final String TEMPLATE_PAGE_PATH_ERROR = "/error.jsp";
 	
-	private static final String PATCHING_TOOL_INFO_CACHE_KEY = "patchingToolInfo";
+	private static final String CACHE_KEY_PATCHING_TOOL_RESULTS = "patchingToolResults";
 	
-	private static final String PATCHING_TOOL_INFO_ARG = "info";
+	private static final String PATCHING_TOOL_OPTION_INFO = "info";
 	
-	private static final String ACTION_NAME = "refreshAction";
-
+	private static final String DEFAULT_PATCHING_OPTION_DEFAULT = PATCHING_TOOL_OPTION_INFO;
+	
 	private Map<String,Object> patchingToolInfoCache = new HashMap<String,Object>();
 	
 	
@@ -69,95 +74,74 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 		
 		try {
 			
-			processView( renderRequest, renderResponse );
+			PatchingToolResults patchingToolResults = lookupPatchingToolResults();
+
+			if (LOG.isInfoEnabled()) {
+				LOG.info("adding patching tool results to portlet session : " + patchingToolResults);
+			}
+			
+			SessionMessages.add(renderRequest, "success");
+
+			PortletSession portletSession = renderRequest.getPortletSession();
+			
+			portletSession.setAttribute( PortletKeys.SESSION_KEY_PATCHING_TOOL_RESULTS, patchingToolResults );
+			
+			super.doView(renderRequest, renderResponse);
 			
 		} catch (Exception e) {
 			
 			LOG.error("Error processing view: " + e.getMessage());
 			
-            // SessionErrors.add(request, e.getClass().getName());
-            // SessionErrors.add(request, "view-error-message", e.getClass().getName());
-			renderRequest.setAttribute("view-error-type", e.getClass().getName());
-			renderRequest.setAttribute("view-error-message", e.getMessage());
-
-            // HttpSession session = request.getSession();
-            // session.setAttribute("view-error-exception", e);
-            // SessionErrors.add(session, "view-error-exception", e);
-            // SessionErrors.add(request, "view-error-exception", e);
-			renderRequest.setAttribute("view-error-exception", e);
+			SessionErrors.add(renderRequest, "error");
 			
-			this.doView( ERROR_TEMPLATE_PATH, renderRequest, renderResponse );
+			PortletSession portletSession = renderRequest.getPortletSession();
 			
+			portletSession.setAttribute( PortletKeys.REQUEST_KEY_PATCHING_TOOL_ERROR_TYPE, e.getClass().getName() );
+			portletSession.setAttribute( PortletKeys.REQUEST_KEY_PATCHING_TOOL_ERROR_MESSAGE, e.getMessage() );
+			portletSession.setAttribute( PortletKeys.REQUEST_KEY_PATCHING_TOOL_ERROR_EXCEPTION, e );
+			
+			include( TEMPLATE_PAGE_PATH_ERROR, renderRequest, renderResponse );
 		}
 		
 		if (LOG.isInfoEnabled()) {
 			LOG.info("dispatch to view ...");
 		}
-		
-		super.doView(renderRequest, renderResponse);
 	}	
 	
 	
-	protected void processView(
-			RenderRequest renderRequest, RenderResponse renderResponse)
-			throws Exception {
-		
-		if (LOG.isInfoEnabled()) {
-			LOG.info("process view ...");
-		}
-		
-		List<String> infoLines = lookupPatchingToolInfoLines();
-
-		if (LOG.isInfoEnabled()) {
-			LOG.info("adding " + infoLines.size() + " info lines to portlet session");
-		}
-
-		PortletSession session = renderRequest.getPortletSession();
-		
-		session.setAttribute(PortletConstants.SESSION_KEY_PATCHING_TOOL_INFO_LINES, infoLines);
-	}
-	
-	
-	protected List<String> lookupPatchingToolInfoLines() throws Exception {
+	protected PatchingToolResults lookupPatchingToolResults() throws Exception {
 		
 		@SuppressWarnings("unchecked")
-		List<String> infoLines = (List<String>) patchingToolInfoCache.get(PATCHING_TOOL_INFO_CACHE_KEY);
+		PatchingToolResults patchingToolResults = (PatchingToolResults) patchingToolInfoCache.get(CACHE_KEY_PATCHING_TOOL_RESULTS);
 
-		if (infoLines == null || infoLines.isEmpty()) {
+		if (patchingToolResults == null) {
 
 			if (LOG.isInfoEnabled()) {
 				LOG.info("cache is empty");
 			}
 			
-			infoLines = queryPatchingToolInfo();
+			patchingToolResults = runPatchingTool();
 			
 			if (LOG.isInfoEnabled()) {
-				LOG.info("adding " + infoLines.size() + " info lines to cache");
+				LOG.info("adding patching tool results to cache: " + patchingToolResults);
 			}
 			
-			patchingToolInfoCache.put(PATCHING_TOOL_INFO_CACHE_KEY, infoLines);
+			patchingToolInfoCache.put(CACHE_KEY_PATCHING_TOOL_RESULTS, patchingToolResults);
 		}
 			
 		if (LOG.isInfoEnabled()) {
-			LOG.info("cache contains " + infoLines.size() + " info lines");
+			LOG.info("cache contains patching tool results: " + patchingToolResults);
 		}
 
-		return infoLines;
+		return patchingToolResults;
 	}
 
 	
-	public void doView(
-			String viewTemplate,
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
-
-		include( viewTemplate, renderRequest, renderResponse );
-	}
-	
-
 	public void refreshAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
+		
+		final String ACTION_NAME = "refreshAction";
 		
 		if (LOG.isInfoEnabled()) {
 			LOG.info("process action " + ACTION_NAME + " ...");
@@ -167,41 +151,58 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 		this.patchingToolInfoCache.clear();
 	}
 	
+
+	private PatchingToolResults runPatchingTool() throws Exception {
+		
+		List<String> commandOptions = new ArrayList<String>();
+		commandOptions.add( DEFAULT_PATCHING_OPTION_DEFAULT );
+		PatchingToolResults patchingToolResults = runPatchingTool( commandOptions );
+		return patchingToolResults;
+	}
 	
-	private List<String> queryPatchingToolInfo() throws Exception {
+	
+	private PatchingToolResults runPatchingTool( List<String> commandOptions ) throws Exception {
 		
 		if (LOG.isInfoEnabled()) {
-			LOG.info("query patching tool info ...");
+			LOG.info("run patching tool ...");
 		}
 		
-		List<String> outputLines = new ArrayList<String>();
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("patching tool command options : " + commandOptions);
+		}
+		
+		if (commandOptions == null) {
+			commandOptions = new ArrayList<String>();
+		}
+		
+		if (commandOptions.isEmpty()) {
+			commandOptions.add( DEFAULT_PATCHING_OPTION_DEFAULT );
+		}
+		
+		PatchingToolResults patchingToolResults = new PatchingToolResults();
 		
 		try {
 			
-			List<String> cmdOptions = new ArrayList<String>();
+			PatchingToolCommandRunner commandRunner = new PatchingToolCommandRunner();
 			
-			cmdOptions.add( PATCHING_TOOL_INFO_ARG );
+			commandRunner.setPatchingToolOptions( commandOptions );
 			
-			PatchingToolCommandRunner cmd = new PatchingToolCommandRunner();
+			commandRunner.runCommand();
 			
-			cmd.setPatchingToolOptions( cmdOptions );
-			
-			cmd.runCommand();
-			
-			outputLines = cmd.getCommandOutputLines();
+			patchingToolResults = commandRunner.getPatchingToolResults();
 						
 		} catch (Exception e) {
 			
-			String msg = "Error querying patching tool info : " + e.getMessage();
+			String msg = "Error running patching tool : " + e.getMessage();
 			LOG.error(msg, e);
 			throw new Exception(msg, e);
 		}
 		
 		if (LOG.isInfoEnabled()) {
-			LOG.info("patching tool info query returned " + outputLines.size() + " lines");
+			LOG.info("patching tool returned results : " + patchingToolResults);
 		}
 		
-		return outputLines;
+		return patchingToolResults;
 	}
 
 }

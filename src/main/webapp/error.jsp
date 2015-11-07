@@ -18,39 +18,29 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String viewErrorType = (String) request.getAttribute("view-error-type");
-String viewErrorMessage = (String) request.getAttribute("view-error-message");
-java.lang.Exception viewErrorException = (java.lang.Exception) request.getAttribute("view-error-exception");
+String portletToolErrorType = (String) portletSession.getAttribute( PortletKeys.REQUEST_KEY_PATCHING_TOOL_ERROR_TYPE );
+String portletToolErrorMessage = (String) portletSession.getAttribute( PortletKeys.REQUEST_KEY_PATCHING_TOOL_ERROR_MESSAGE );
+java.lang.Exception portletToolErrorException = (java.lang.Exception) portletSession.getAttribute( PortletKeys.REQUEST_KEY_PATCHING_TOOL_ERROR_EXCEPTION );
 %>
 
-<h3 class="portlet-msg-error">
-	<liferay-ui:message key="unable-to-process-patching-tool-info-request" />
-</h3>
+<liferay-ui:error key="error" message="unable-to-run-patching-tool" />
 
-<%--
-<div>
-	<liferay-ui:error key="view-error-message" />
-	<hr>
-	<liferay-ui:error key="view-error-exception" />
-</div>
---%>
-
-<div class="portlet-msg-error">
+<div class="portlet-msg-error"> 
 <p>
-<% if (viewErrorType != null) { %>
-<b>View Error Type:</b> <%= viewErrorType %>
+<% if (portletToolErrorType != null) { %>
+<b>Error Type:</b> <%= portletToolErrorType %>
 <% } %>
 </p>
 <p>
-<% if (viewErrorMessage != null) { %>
-<b>View Error Message:</b> <%= viewErrorMessage %>
+<% if (portletToolErrorMessage != null) { %>
+<b>Error Message:</b> <%= portletToolErrorMessage %>
 <% } %>
 </p>
-<%--
-<pre>
-<% if (viewErrorException != null) { %>
-<%= viewErrorException.getMessage() %>
+<p>
+<% if (portletToolErrorException != null) { %>
+<b>Error Exception:</b> <%= portletToolErrorException %>
 <% } %>
-</pre>
---%>
+</p>
 </div>
+
+<hr>

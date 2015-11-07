@@ -43,7 +43,7 @@ public class StringHelper {
 	 * @param list input List of String items
 	 * @return flattened String with items separated by spaces
 	 */
-	public static String flattenStringList(List<?> list) {
+	public static String flattenStringList(List<String> list) {
 		
 		return flattenStringList(list, StringPool.SPACE);
 	}
@@ -56,7 +56,7 @@ public class StringHelper {
 	 * @param itemSep list item seperator
 	 * @return flattened String with items separated by spaces
 	 */
-	public static String flattenStringList(List<?> list, String itemSep) {
+	public static String flattenStringList(List<String> list, String itemSep) {
 		
 		if (itemSep == null) {
 			itemSep = StringPool.SPACE;
@@ -64,15 +64,61 @@ public class StringHelper {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		for (Object item : list) {
-			
+		for (String item : list) {
 			sb.append(item.toString());
-			
 			sb.append(itemSep);
 		}
 		
 		return sb.toString();
 	}	
+	
+	
+	/** 
+	 * Trims a List of String lines.
+	 * 
+	 * @param list input List of String lines
+	 * @return List of trimmed String itlinesems
+	 */
+	public static List<String> trimStringLineList(List<String> lines) {
+		
+		List<String> newLines = new ArrayList<String>();
+		
+		if (lines != null) {
+			for (String line : lines) {
+				String str = line;
+				str = line.trim();
+				String newLine = str;
+				newLines.add(newLine);
+			}
+		}
+		
+		return newLines;
+	}
+	
+	
+	/** 
+	 * Strips end of line markers from a List of String lines.
+	 * 
+	 * @param list input List of String lines
+	 * @return List of trimmed String lines
+	 */
+	public static List<String> stripEolFromStringLineList(List<String> lines) {
+		
+		List<String> newLines = new ArrayList<String>();
+		
+		if (lines != null) {
+			for (String line : lines) {
+				String str = line;
+				str = str.replace(StringPool.NEW_LINE, StringPool.BLANK);
+				str = str.replace(StringPool.RETURN, StringPool.BLANK);
+				String newLine = str;
+				newLines.add(newLine);
+			}
+		}
+		
+		return newLines;
+	}
+	
 	
 	/**
 	 * Strips chars from input List of String lines and returns new List of String lines.
@@ -83,26 +129,13 @@ public class StringHelper {
 	 * 
 	 * @see StringUtils#strip(String,String)
 	 */
-	public static List<String> strip(List<String> lines, String stripChars) {
+	public static List<String> stripStringLineList(List<String> lines, String stripChars) {
 		
 		List<String> newLines = new ArrayList<String>();
 		
 		if (lines != null) {
-			
-			if (LOG.isTraceEnabled()) {
-				LOG.trace("stripping " + lines.size() + " lines ...");
-			}
-			
 			for (String line : lines) {
-				
-				String newLine = StringUtils.strip(line, stripChars);
-				
-				if (LOG.isTraceEnabled()) {
-					LOG.trace("stripped " + stripChars + " from line");
-					LOG.trace("line: " + line);
-					LOG.trace("newLine: " + newLine);
-				}
-				
+				String newLine = StringUtils.strip( line, stripChars );
 				newLines.add(newLine);
 			}
 		}
