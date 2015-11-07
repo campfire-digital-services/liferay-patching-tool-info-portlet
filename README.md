@@ -21,7 +21,7 @@ Similar patching details can be seen by running the patching tool at the command
 
 #### Running patching tool in Unix or Linux shell
     
-    > cd $LIFERAY_HOME
+    % cd $LIFERAY_HOME
     % cd patching-tool
     % patching-tool.sh info
 
