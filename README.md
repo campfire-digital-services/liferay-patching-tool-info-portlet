@@ -143,6 +143,11 @@ Build "liferay-patching-tool-info-portlet-A.B.C.war" in the "targets" folder.
     % mvn -U clean package
 
 
+## Troubleshooting
+
+See [Troubleshooting](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Troubleshooting) topics in project wiki.
+
+
 ## Dependencies
 
 Building this project source requires the following tools:
