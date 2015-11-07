@@ -33,6 +33,8 @@ import org.apache.commons.io.IOUtils;
  * Patching Tool Command Runner.
  * 
  * @author Tim Telcik <tim.telcik@permeance.com.au>
+ * 
+ * @see PatchingToolResults
  */
 public class PatchingToolCommandRunner {
 
@@ -47,8 +49,6 @@ public class PatchingToolCommandRunner {
 	private static final String MS_WINDOWS_SHELL_OPTION = "/c";
 
 	private static final String UNIX_LINUX_SHELL_NAME = "/bin/sh";
-	
-	private static final String UNIX_LINUX_SHELL_OPTION = "-l";
 	
 	private static final String PATCHING_TOOL_HOME_FOLDER_NAME = "patching-tool";
 	
@@ -263,7 +263,6 @@ public class PatchingToolCommandRunner {
 			commandList.add( MS_WINDOWS_SHELL_OPTION );
 		} else {
 			commandList.add( UNIX_LINUX_SHELL_NAME );
-			// commandList.add( UNIX_LINUX_SHELL_OPTION );
 		}
 		
 		return commandList;
