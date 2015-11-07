@@ -112,7 +112,7 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 	protected PatchingToolResults lookupPatchingToolResults() throws Exception {
 		
 		@SuppressWarnings("unchecked")
-		PatchingToolResults patchingToolResults = (PatchingToolResults) patchingToolInfoCache.get(CACHE_KEY_PATCHING_TOOL_RESULTS);
+		PatchingToolResults patchingToolResults = (PatchingToolResults) patchingToolInfoCache.get( CACHE_KEY_PATCHING_TOOL_RESULTS );
 
 		if (patchingToolResults == null) {
 
@@ -126,7 +126,7 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 				LOG.info("adding patching tool results to cache: " + patchingToolResults);
 			}
 			
-			patchingToolInfoCache.put(CACHE_KEY_PATCHING_TOOL_RESULTS, patchingToolResults);
+			patchingToolInfoCache.put( CACHE_KEY_PATCHING_TOOL_RESULTS, patchingToolResults );
 		}
 			
 		if (LOG.isInfoEnabled()) {

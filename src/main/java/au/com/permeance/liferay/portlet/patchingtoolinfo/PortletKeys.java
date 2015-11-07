@@ -17,7 +17,7 @@ package au.com.permeance.liferay.portlet.patchingtoolinfo;
 
 
 /**
- * Portlet Constants.
+ * Portlet Keys.
  *
  * @author Tim Telcik <tim.telcik@permeance.com.au>
  */

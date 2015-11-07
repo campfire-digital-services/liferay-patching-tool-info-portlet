@@ -30,20 +30,6 @@ if (portletSession.getAttribute(PortletKeys.SESSION_KEY_PATCHING_TOOL_RESULTS) !
 	patchingToolErrorLines = patchingToolResults.getErrorLines();
 }
 
-/*
-if (patchingToolOutputLines != null) {
-   // patchingToolOutputLines = StringHelper.trimStringLineList(patchingToolOutputLines);
-	patchingToolOutputLines = StringHelper.stripEolFromStringLineList(patchingToolOutputLines);
-}
-*/
-
-/*
-if (patchingToolErrorLines != null) {
-	// patchingToolErrorLines = StringHelper.trimStringLineList(patchingToolErrorLines); 
-	patchingToolErrorLines = StringHelper.stripEolFromStringLineList(patchingToolErrorLines); 
-}
-*/
-
 request.setAttribute("patchingToolOutputLines", patchingToolOutputLines);
 request.setAttribute("patchingToolErrorLines", patchingToolErrorLines);
 %>
@@ -69,34 +55,12 @@ request.setAttribute("patchingToolErrorLines", patchingToolErrorLines);
 </div>
 </c:if>
 
-<%--
-<c:if test="${not empty patchingToolOutputLines}">
-<hr>
-<div id="patching_tool_output_lines">
-   <c:forEach items="${patchingToolOutputLines}" var="line">
-      <c:out value="${line}"/> <br>
-   </c:forEach>
-</div>
-</c:if>
- --%>
-
 <c:if test="${not empty patchingToolErrorLines}">
 <hr>
 <div id="patching_tool_error_lines">
    <pre><c:forEach items="${patchingToolErrorLines}" var="line"><c:out value="${line}"/><br></c:forEach></pre>   
 </div>
 </c:if>
-
-<%--
-<c:if test="${not empty patchingToolErrorLines}">
-<hr>
-<div id="patching_tool_error_lines">
-   <c:forEach items="${patchingToolErrorLines}" var="line">
-      <c:out value="${line}"/> <br>
-   </c:forEach>
-</div>
-</c:if>
- --%>
 
 <hr>
 

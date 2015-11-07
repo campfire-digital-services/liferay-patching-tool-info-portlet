@@ -28,7 +28,7 @@ not, see <http://www.gnu.org/licenses/>.
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
-		<resource-bundle>content/Language</resource-bundle>		
+		<resource-bundle>content.Language</resource-bundle>		
 		<portlet-info>
 			<title>Patching Tool Info</title>
 			<short-title>Patching Tool Info</short-title>
