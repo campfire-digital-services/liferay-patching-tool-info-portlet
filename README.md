@@ -9,17 +9,17 @@ The Liferay Patching Tool Info portlet display details from the Liferay Portal E
 
 The Liferay Patching Tool Info portlet captures details from the Liferay Portal Enterprise Edition (EE) patching tool and displays those details in the portlet view.
 
-### Sample Command Shell Usage
+Equivalent patch details can be found by running the patching tool portlet from a command shell.
 
-Similar patching details can be seen by running the patching tool at the command line.
+eg.
 
-#### Running patching tool in Microsoft Windows command shell
+Running patching tool in Microsoft Windows command shell
 
     > cd %LIFERAY_HOME%
     > cd patching-tool
     > patching-tool.bat info
 
-#### Running patching tool in Unix or Linux shell
+Running patching tool in Unix or Linux shell
     
     % cd $LIFERAY_HOME
     % cd patching-tool
@@ -48,6 +48,11 @@ The patching details can be useful to portal administrators when reviewing confi
 ## Downloads
 
 * [SourceForge - Liferay Patching Tool Info Portlet](https://sourceforge.net/projects/permeance-apps/files/liferay-patching-tool-info-portlet/ "Liferay Patching Tool Info Portlet")
+
+
+## Configuration
+
+* [Configuration](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Configuration) wiki article.
 
 
 ## Installation
@@ -145,7 +150,7 @@ Build "liferay-patching-tool-info-portlet-A.B.C.war" in the "targets" folder.
 
 ## Troubleshooting
 
-See [Troubleshooting](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Troubleshooting) topics in project wiki.
+* [Troubleshooting](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Troubleshooting) wiki article.
 
 
 ## Dependencies
