@@ -10,7 +10,7 @@ The Liferay Patching Tool Info portlet display details from the Liferay Portal E
 
 The Liferay Patching Tool Info portlet captures details from the [Liferay Portal](https://www.liferay.com/documentation/liferay-portal/6.2/user-guide) Enterprise Edition (EE) [patching tool](https://www.liferay.com/documentation/liferay-portal/6.2/user-guide/-/ai/patching-liferay-liferay-portal-6-2-user-guide-18-en) and displays those details in the portlet view.
 
-![Liferay Portal 6.2 EE Control Panel - Patching Tool Info](docs/images/liferay-portal/6.2.x/lp-6.2.x-control-panel-patching-tool-info-20151025-annot-800x620.jpg)
+![Liferay Portal 6.2 EE Control Panel - Patching Tool Info](https://raw.githubusercontent.com/permeance/liferay-patching-tool-info-portlet/master/docs/images/liferay-portal/6.2.x/lp-6.2.x-control-panel-patching-tool-info-20151025-annot-800x620.jpg)
 
 The patching details can be useful to portal administrators when reviewing configuration and/or submitting support requests.
 
