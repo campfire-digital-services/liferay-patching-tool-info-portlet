@@ -58,7 +58,7 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 	
 	private static final String PATCHING_TOOL_OPTION_INFO = "info";
 	
-	private static final String DEFAULT_PATCHING_OPTION_DEFAULT = PATCHING_TOOL_OPTION_INFO;
+	private static final String PATCHING_OPTION_DEFAULT = PATCHING_TOOL_OPTION_INFO;
 	
 	private Map<String,Object> patchingToolInfoCache = new HashMap<String,Object>();
 	
@@ -155,7 +155,7 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 	private PatchingToolResults runPatchingTool() throws Exception {
 		
 		List<String> commandOptions = new ArrayList<String>();
-		commandOptions.add( DEFAULT_PATCHING_OPTION_DEFAULT );
+		commandOptions.add( PATCHING_OPTION_DEFAULT );
 		PatchingToolResults patchingToolResults = runPatchingTool( commandOptions );
 		return patchingToolResults;
 	}
@@ -176,7 +176,7 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 		}
 		
 		if (commandOptions.isEmpty()) {
-			commandOptions.add( DEFAULT_PATCHING_OPTION_DEFAULT );
+			commandOptions.add( PATCHING_OPTION_DEFAULT );
 		}
 		
 		PatchingToolResults patchingToolResults = new PatchingToolResults();
