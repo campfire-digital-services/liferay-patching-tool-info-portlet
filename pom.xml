@@ -174,7 +174,7 @@
 	<inceptionYear>2015</inceptionYear>
 	<ciManagement>
 		<system>Permeance Jenkins</system>
-		<url>https://jenkins.permeance.com.au/job/liferay-patching-tool-info-portlet-6.1.x/</url>
+		<url>https://github.com/permeance/liferay-patching-tool-info-portlet-master</url>
 	</ciManagement>
 	<issueManagement>
 		<system>Permeance JIRA</system>
