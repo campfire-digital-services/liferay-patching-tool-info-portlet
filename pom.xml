@@ -10,9 +10,9 @@
 	<version>0.6.1-SNAPSHOT</version>
 
 	<scm>
-		<connection>https://github.com/permeance/liferay-patching-tool-info-portlet.git</connection>
-		<developerConnection>https://github.com/permeance/liferay-patching-tool-info-portlet.git</developerConnection>
-		<url>scm:git:https://github.com/permeance/liferay-patching-tool-info-portlet.git</url>
+		<url>https://github.com/permeance/liferay-patching-tool-info-portlet</url>	
+		<connection>scm:git:https://github.com/permeance/liferay-patching-tool-info-portlet.git</connection>
+		<developerConnection>scm:git:https://github.com/permeance/liferay-patching-tool-info-portlet.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -168,6 +168,13 @@
 		<name>Permeance Technologies</name>
 		<url>http://www.permeance.com.au</url>
 	</organization>
+	<licenses>
+		<license>
+			<name>GNU General Public License Version 3.0</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0.en.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>	
 	<name>Liferay Patching Tool Info Portlet</name>
 	<url>http://www.permeance.com.au</url>
 	<description>The Liferay Patching Tool Info portlet display details from the Liferay Portal Enterprise Edition (EE) patching tool.</description>
@@ -177,7 +184,7 @@
 		<url>https://github.com/permeance/liferay-patching-tool-info-portlet-master</url>
 	</ciManagement>
 	<issueManagement>
-		<system>Permeance JIRA</system>
-		<url>https://jira.permeance.com.au</url>
+		<url>https://github.com/permeance/liferay-patching-tool-info-portlet/issues</url>
+		<system>GitHub Issues</system>
 	</issueManagement>
 </project>
