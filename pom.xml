@@ -10,9 +10,9 @@
 	<version>0.6.1-SNAPSHOT</version>
 
 	<scm>
-		<connection>https://github.com/permeance/liferay-patching-tool-info-portlet</connection>
-		<developerConnection>https://github.com/permeance/liferay-patching-tool-info-portlet</developerConnection>
-		<url>scm:git:https://github.com/permeance/liferay-patching-tool-info-portlet</url>
+		<connection>https://github.com/permeance/liferay-patching-tool-info-portlet.git</connection>
+		<developerConnection>https://github.com/permeance/liferay-patching-tool-info-portlet.git</developerConnection>
+		<url>scm:git:https://github.com/permeance/liferay-patching-tool-info-portlet.git</url>
 		<tag>HEAD</tag>
 	</scm>
 
