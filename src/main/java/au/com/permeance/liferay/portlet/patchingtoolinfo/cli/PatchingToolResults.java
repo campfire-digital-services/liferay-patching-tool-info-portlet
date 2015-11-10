@@ -15,6 +15,7 @@
 
 package au.com.permeance.liferay.portlet.patchingtoolinfo.cli;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +26,9 @@ import java.util.List;
  * 
  * @author Tim Telcik <tim.telcik@permeance.com.au>
  */
-public class PatchingToolResults {
+public class PatchingToolResults implements Serializable {
+	
+	private static final long serialVersionUID = 1183293828483589188L;
 	
 	private int exitValue = 0;
 	private List<String> outputLines = Collections.emptyList();
