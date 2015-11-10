@@ -2,7 +2,7 @@
 
 **liferay-patching-tool-info-portlet**
 
-The Liferay Patching Tool Info portlet display details from the Liferay Portal Enterprise Edition (EE) patching tool.
+The Liferay Patching Tool Info portlet displays details from the Liferay Portal Enterprise Edition (EE) patching tool.
 
 
 ## Overview
