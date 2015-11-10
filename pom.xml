@@ -180,7 +180,7 @@
 	<inceptionYear>2015</inceptionYear>
 	<ciManagement>
 		<system>Permeance Jenkins</system>
-		<url>https://github.com/permeance/liferay-patching-tool-info-portlet-6.1.x</url>
+		<url>https://github.com/permeance/liferay-patching-tool-info-portlet-master</url>
 	</ciManagement>
 	<issueManagement>
 		<url>https://github.com/permeance/liferay-patching-tool-info-portlet/issues</url>
