@@ -10,57 +10,70 @@ The Liferay Patching Tool Info portlet display details from the Liferay Portal E
 
 The Liferay Patching Tool Info portlet captures details from the [Liferay Portal](https://www.liferay.com/documentation/liferay-portal/6.2/user-guide) Enterprise Edition (EE) [patching tool](https://www.liferay.com/documentation/liferay-portal/6.2/user-guide/-/ai/patching-liferay-liferay-portal-6-2-user-guide-18-en) and displays those details in the Liferay Portal Control Panel.
 
-![Liferay Portal 6.2 EE Control Panel - Patching Tool Info](docs/images/liferay-portal/6.2.x/lp-6.2.x-control-panel-patching-tool-info-20151025-annot-800x620.jpg)
-
 The patching details can be useful to portal administrators when reviewing portal configuration and/or submitting support requests.
 
-NOTE: The [patching tool](https://www.liferay.com/documentation/liferay-portal/6.2/user-guide/-/ai/patching-liferay-liferay-portal-6-2-user-guide-18-en) is a command line tool packaged with Liferay Portal EE. Hence, the Liferay Patching Tool Info portlet is only available for Liferay Portal 6.1.x EE and 6.2.x EE.
+For more details, refer to project [wiki](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki).
 
-* Refer to [Home](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Home) wiki article.
+
+## Sample Screens
+
+### Liferay Portal 6.1 EE Control Panel Server
+![Liferay Portal 6.2 EE Control Panel Server - Patching Tool Info](https://raw.githubusercontent.com/permeance/liferay-patching-tool-info-portlet/master/doc/images/liferay-portal/6.1.x/20151109/lp-6.1.x-control-panel-server-patching-tool-info-annot-800x534-annot.jpg)
+
+### Liferay Portal 6.2 EE Control Panel Apps
+![Liferay Portal 6.2 EE Control Panel Apps - Patching Tool Info](https://raw.githubusercontent.com/permeance/liferay-patching-tool-info-portlet/master/doc/images/liferay-portal/6.2.x/20151109/lp-6.2.x-control-panel-apps-patching-tool-info-800x546-annot.jpg)
 
 
 ## Supported Products
 
-* Refer to [Supported Products](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Supported-Products) wiki article.
+Refer to [Supported Products](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Supported-Products) wiki article.
 
 
-## Downloads
+## Quickstart
 
-* Refer to [Downloads](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Downloads) wiki article.
+Refer to [Quickstart](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Quickstart) wiki article.
 
 
 ## Configuration
 
-* Refer to [Configuration](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Configuration) wiki article.
+Refer to [Configuration](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Configuration) wiki article.
+
+
+## Downloads
+
+Refer to [Downloads](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Downloads) wiki article.
 
 
 ## Installation
 
-* Refer to [Installation](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Installation) wiki article.
+Refer to [Installation](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Installation) wiki article.
 
 
 ## Usage
 
-* Refer to [Usage](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Usage) wiki article.
+Refer to [Usage](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Usage) wiki article.
 
 
 ## Source
 
-* Refer to [Source](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Source) wiki article.
-
-
-## Building
-
-* Refer to [Building](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Building) wiki article.
+Refer to [Source](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Source) wiki article.
 
 
 ## Troubleshooting
 
-* Refer to [Troubleshooting](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Troubleshooting) wiki article.
+Refer to [Troubleshooting](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Troubleshooting) wiki article.
 
 
-## Authors
+## Contacts
 
-* Terry Mueller <terry.mueller@permeance.com.au>
-* Tim Telcik <tim.telcik@permeance.com.au>
+Refer to [Contacts](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Contacts) wiki article.
 
+
+## Support
+
+Refer to [Support](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Support) wiki article.
+
+
+## License
+
+Refer to [License](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/License) wiki article.
