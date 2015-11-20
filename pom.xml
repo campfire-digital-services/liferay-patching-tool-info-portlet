@@ -90,11 +90,13 @@
 			<groupId>org.apache.maven.scm</groupId>
 			<artifactId>maven-scm-api</artifactId>
 			<version>1.9.4</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven.scm</groupId>
 			<artifactId>maven-scm-provider-gitexe</artifactId>
 			<version>1.9.4</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
