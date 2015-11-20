@@ -15,8 +15,6 @@
 
 package au.com.permeance.liferay.portlet.patchingtoolinfo.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.ArrayList;
@@ -33,9 +31,6 @@ import org.apache.commons.lang.StringUtils;
  * @see StringUtils
  */
 public class StringHelper {
-	
-	private static Log LOG = LogFactoryUtil.getLog(StringHelper.class);
-	
 	
 	/** 
 	 * Flattens a List of String items into a single String.
