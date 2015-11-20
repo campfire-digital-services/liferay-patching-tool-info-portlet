@@ -68,16 +68,16 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 		
-		if (LOG.isInfoEnabled()) {
-			LOG.info("do view ...");
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("do view ...");
 		}
 		
 		try {
 			
 			PatchingToolResults patchingToolResults = lookupPatchingToolResults();
 
-			if (LOG.isInfoEnabled()) {
-				LOG.info("adding patching tool results to portlet session : " + patchingToolResults);
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("adding patching tool results to portlet session : " + patchingToolResults);
 			}
 			
 			SessionMessages.add(renderRequest, "success");
@@ -103,8 +103,8 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 			include( TEMPLATE_PAGE_PATH_ERROR, renderRequest, renderResponse );
 		}
 		
-		if (LOG.isInfoEnabled()) {
-			LOG.info("dispatch to view ...");
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("dispatch to view ...");
 		}
 	}	
 	
@@ -116,21 +116,21 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 
 		if (patchingToolResults == null) {
 
-			if (LOG.isInfoEnabled()) {
-				LOG.info("cache is empty");
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("cache is empty");
 			}
 			
 			patchingToolResults = runPatchingTool();
 			
-			if (LOG.isInfoEnabled()) {
-				LOG.info("adding patching tool results to cache: " + patchingToolResults);
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("adding patching tool results to cache: " + patchingToolResults);
 			}
 			
 			patchingToolInfoCache.put( CACHE_KEY_PATCHING_TOOL_RESULTS, patchingToolResults );
 		}
 			
-		if (LOG.isInfoEnabled()) {
-			LOG.info("cache contains patching tool results: " + patchingToolResults);
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("cache contains patching tool results: " + patchingToolResults);
 		}
 
 		return patchingToolResults;
@@ -143,9 +143,9 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 		
 		final String ACTION_NAME = "refreshAction";
 		
-		if (LOG.isInfoEnabled()) {
-			LOG.info("process action " + ACTION_NAME + " ...");
-			LOG.info("clear current cache ...");
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("process action " + ACTION_NAME + " ...");
+			LOG.debug("clear current cache ...");
 		}
 
 		this.patchingToolInfoCache.clear();
@@ -163,12 +163,9 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 	
 	private PatchingToolResults runPatchingTool( List<String> commandOptions ) throws Exception {
 		
-		if (LOG.isInfoEnabled()) {
-			LOG.info("run patching tool ...");
-		}
-		
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("patching tool command options : " + commandOptions);
+			LOG.debug("run patching tool ...");
+			LOG.debug("patching tool command options : " + commandOptions);			
 		}
 		
 		if (commandOptions == null) {
@@ -198,8 +195,8 @@ public class PatchingToolInfoMVCPortlet extends MVCPortlet {
 			throw new Exception(msg, e);
 		}
 		
-		if (LOG.isInfoEnabled()) {
-			LOG.info("patching tool returned results : " + patchingToolResults);
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("patching tool returned results : " + patchingToolResults);
 		}
 		
 		return patchingToolResults;

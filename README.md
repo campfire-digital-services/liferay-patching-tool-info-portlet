@@ -12,7 +12,7 @@ The Liferay Patching Tool Info portlet captures details from the [Liferay Portal
 
 The patching details can be useful to portal administrators when reviewing portal configuration and/or submitting support requests.
 
-For more details, refer to project [wiki](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki).
+For more details, refer to the project [wiki](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki).
 
 
 ## Sample Screens
@@ -26,54 +26,54 @@ For more details, refer to project [wiki](https://github.com/permeance/liferay-p
 
 ## Supported Products
 
-Refer to [Supported Products](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Supported-Products) wiki article.
+Refer to the [Supported Products](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Supported-Products) wiki article.
 
 
 ## Quickstart
 
-Refer to [Quickstart](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Quickstart) wiki article.
+Refer to the [Quickstart](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Quickstart) wiki article.
 
 
 ## Configuration
 
-Refer to [Configuration](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Configuration) wiki article.
+Refer to the [Configuration](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Configuration) wiki article.
 
 
 ## Downloads
 
-Refer to [Downloads](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Downloads) wiki article.
+Refer to the [Downloads](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Downloads) wiki article.
 
 
 ## Installation
 
-Refer to [Installation](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Installation) wiki article.
+Refer to the [Installation](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Installation) wiki article.
 
 
 ## Usage
 
-Refer to [Usage](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Usage) wiki article.
+Refer to the [Usage](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Usage) wiki article.
 
 
 ## Source
 
-Refer to [Source](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Source) wiki article.
+Refer to the [Source](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Source) wiki article.
 
 
 ## Troubleshooting
 
-Refer to [Troubleshooting](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Troubleshooting) wiki article.
+Refer to the [Troubleshooting](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Troubleshooting) wiki article.
 
 
 ## Contacts
 
-Refer to [Contacts](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Contacts) wiki article.
+Refer to the [Contacts](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Contacts) wiki article.
 
 
 ## Support
 
-Refer to [Support](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Support) wiki article.
+Refer to the [Support](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Support) wiki article.
 
 
 ## License
 
-Refer to [License](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/License) wiki article.
+Refer to the [License](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/License) wiki article.
