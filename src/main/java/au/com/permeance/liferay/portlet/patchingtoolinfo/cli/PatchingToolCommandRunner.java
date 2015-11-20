@@ -85,8 +85,8 @@ public class PatchingToolCommandRunner {
 
 	public void runCommand() throws Exception {
 		
-		if (LOG.isInfoEnabled()) {
-			LOG.info("running patching tool command ...");
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("running patching tool command ...");
 		}
 
 		try {
@@ -104,10 +104,10 @@ public class PatchingToolCommandRunner {
 				LOG.debug("command directory : " + processBuilder.directory());
 			}
 			
-			if (LOG.isInfoEnabled()) {
+			if (LOG.isDebugEnabled()) {
 				List<String> commandList = processBuilder.command();
 				String processCommandStr = StringHelper.flattenStringList( commandList );
-				LOG.info("running command : " + processCommandStr);
+				LOG.debug("running patching tool command : " + processCommandStr);
 			}
 
 			Process process = processBuilder.start();
@@ -131,14 +131,14 @@ public class PatchingToolCommandRunner {
 				LOG.debug("patchingToolResults: " + patchingToolResults);
 			}
 			
-			if (LOG.isInfoEnabled()) {
-				LOG.info("patching tool returned exit code " + this.patchingToolResults.getExitValue() );
-				LOG.info("patching tool returned " + this.patchingToolResults.getOutputLines().size() + " output lines");
-				LOG.info("--- COMMAND OUTPUT ---");
-				LOG.info(processOutputLines);
-				LOG.info("patching tool returned " + this.patchingToolResults.getErrorLines().size() + " error lines");
-				LOG.info("--- COMMAND ERROR ---");				
-				LOG.info(processErrorLines);
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("patching tool returned exit code " + this.patchingToolResults.getExitValue() );
+				LOG.debug("patching tool returned " + this.patchingToolResults.getOutputLines().size() + " output lines");
+				LOG.debug("--- COMMAND OUTPUT ---");
+				LOG.debug(processOutputLines);
+				LOG.debug("patching tool returned " + this.patchingToolResults.getErrorLines().size() + " error lines");
+				LOG.debug("--- COMMAND ERROR ---");				
+				LOG.debug(processErrorLines);
 			}
 			
 			// NOTE: Command shell may return lines in the error stream that are warning messages, not errors.

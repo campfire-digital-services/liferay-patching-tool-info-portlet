@@ -93,9 +93,9 @@ public class PatchingToolResults implements Serializable {
 		buffer.append(this.getClass().getName());
 		buffer.append("[");
 		buffer.append("exitValue.size=" + exitValue);
-		buffer.append(",");
+		buffer.append(", ");
 		buffer.append("outputLines.size=" + outputLines.size());
-		buffer.append(",");
+		buffer.append(", ");
 		buffer.append("errorLines.size=" + errorLines.size());
 		buffer.append("]");
 		return buffer.toString();
