@@ -16,11 +16,18 @@
 	</scm>
 
 	<properties>
+		<com.liferay.portal.kernel.version>2.2.0</com.liferay.portal.kernel.version>
+		<com.liferay.util.bridges.version>2.0.1</com.liferay.util.bridges.version>		
+		<com.liferay.util.java.version>2.0.1</com.liferay.util.java.version>
+		<com.liferay.util.taglib.version>2.1.0</com.liferay.util.taglib.version>
+
 		<commons-io.version>2.1</commons-io.version>
 		<commons-lang.version>2.6</commons-lang.version>
+
 		<javax.servlet.jsp.version>2.0</javax.servlet.jsp.version>
+
 		<jstl.version>1.2</jstl.version>
-		<liferay.version>6.1.1</liferay.version>
+
 		<portlet-api.version>2.0</portlet-api.version>
 		<servlet-api.version>2.4</servlet-api.version>
 	</properties>
@@ -98,28 +105,36 @@
 			<version>1.9.4</version>
 			<scope>provided</scope>
 		</dependency>
+		<!--
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
 			<artifactId>portal-service</artifactId>
 			<version>${liferay.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
-			<artifactId>util-bridges</artifactId>
-			<version>${liferay.version}</version>
+			<artifactId>com.liferay.portal.kernel</artifactId>
+			<version>${com.liferay.portal.kernel.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
-			<artifactId>util-taglib</artifactId>
-			<version>${liferay.version}</version>
+			<artifactId>com.liferay.util.bridges</artifactId>
+			<version>${com.liferay.util.bridges.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
-			<artifactId>util-java</artifactId>
-			<version>${liferay.version}</version>
+			<artifactId>com.liferay.util.taglib</artifactId>
+			<version>${com.liferay.util.taglib.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.liferay.portal</groupId>
+			<artifactId>com.liferay.util.java</artifactId>
+			<version>${com.liferay.util.java.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
