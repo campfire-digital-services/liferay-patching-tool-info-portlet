@@ -23,7 +23,6 @@ For more details, refer to the project [wiki](https://github.com/permeance/lifer
 ### Liferay Portal 6.2 EE Control Panel Apps
 ![Liferay Portal 6.2 EE Control Panel Apps - Patching Tool Info](https://raw.githubusercontent.com/permeance/liferay-patching-tool-info-portlet/master/doc/images/liferay-portal/6.2.x/20151109/lp-6.2.x-control-panel-apps-patching-tool-info-800x546-annot.jpg)
 
-
 ## Supported Products
 
 Refer to the [Supported Products](https://github.com/permeance/liferay-patching-tool-info-portlet/wiki/Supported-Products) wiki article.
