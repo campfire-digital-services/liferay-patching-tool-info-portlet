@@ -39,12 +39,23 @@ request.setAttribute("patchingToolErrorLines", patchingToolErrorLines);
 </c:if>
 
 <c:if test="${not empty patchingToolOutputLines}">
+<hr>
 <div id="patching_tool_controls">
    <portlet:actionURL name="refreshAction" var="refreshActionURL"></portlet:actionURL>
 
    <aui:form action="<%= refreshActionURL %>" method="post" name="fm">
-	   <aui:button type="submit" value="Refresh" />
+   
+       <aui:button 
+          cssClass="btn-lg"
+          id="submit"
+          label="Refresh"
+          value="Refresh"          
+          primary="<%= true %>" 
+          type="submit"
+       />
+	   
    </aui:form>
+   
 </div>
 </c:if>
 
