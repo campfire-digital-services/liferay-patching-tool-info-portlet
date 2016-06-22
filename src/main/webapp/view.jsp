@@ -46,6 +46,7 @@ request.setAttribute("patchingToolErrorLines", patchingToolErrorLines);
    <aui:form action="<%= refreshActionURL %>" method="post" name="fm">
    
        <aui:button
+          cssClass="btn btn-lg"
           id="submit"
           label="Refresh"
           value="Refresh"          
@@ -75,4 +76,3 @@ request.setAttribute("patchingToolErrorLines", patchingToolErrorLines);
 <hr>
 
 <br>
-
