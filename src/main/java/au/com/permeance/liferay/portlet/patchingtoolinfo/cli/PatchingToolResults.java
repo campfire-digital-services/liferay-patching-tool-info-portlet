@@ -58,7 +58,7 @@ public class PatchingToolResults implements Serializable {
 
 	
 	public void setOutputLines(List<String> lines) {
-		this.outputLines = new ArrayList<String>(lines);
+		this.outputLines = new ArrayList<>(lines);
 	}
 
 	
@@ -68,12 +68,12 @@ public class PatchingToolResults implements Serializable {
 
 
 	public boolean hasOutputLines() {
-		return (getOutputLines().size() > 0);
+		return !getOutputLines().isEmpty();
 	}
 
 	
 	public void setErrorLines(List<String> lines) {
-		this.errorLines = new ArrayList<String>(lines);
+		this.errorLines = new ArrayList<>(lines);
 	}
 
 	
@@ -83,13 +83,13 @@ public class PatchingToolResults implements Serializable {
 	
 	
 	public boolean hasErrorLines() {
-		return (getErrorLines().size() > 0);
+		return !getErrorLines().isEmpty();
 	}
 
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append(this.getClass().getName());
 		buffer.append("[");
 		buffer.append("exitValue.size=" + exitValue);

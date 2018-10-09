@@ -1,0 +1,12 @@
+Bundle-Name:Patching Tool Info Portlet
+Bundle-SymbolicName: au.com.permeance.liferay.patching.tool.info.portlet
+Bundle-Version: ${project.version}
+Include-Resource: \
+	@commons-io-${commons-io.version}.jar,\
+	@commons-lang-${commons-lang.version}.jar
+-contract: JavaPortlet
+-jsp: *.jsp,*.jspf
+-plugin.bundle: com.liferay.ant.bnd.resource.bundle.ResourceBundleLoaderAnalyzerPlugin
+-plugin.jsp: com.liferay.ant.bnd.jsp.JspAnalyzerPlugin
+-plugin.sass: com.liferay.ant.bnd.sass.SassAnalyzerPlugin
+-sources: true

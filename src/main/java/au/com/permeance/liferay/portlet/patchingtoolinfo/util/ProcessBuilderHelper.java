@@ -15,10 +15,10 @@
 
 package au.com.permeance.liferay.portlet.patchingtoolinfo.util;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import java.io.File;
 import java.util.List;
+
+import com.liferay.petra.string.StringPool;
 
 
 /**

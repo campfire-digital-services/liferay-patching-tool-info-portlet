@@ -15,7 +15,7 @@
 
 package au.com.permeance.liferay.portlet.patchingtoolinfo.util;
 
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.petra.string.StringPool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,9 +80,7 @@ public class StringHelper {
 		
 		if (lines != null) {
 			for (String line : lines) {
-				String str = line;
-				str = line.trim();
-				String newLine = str;
+				String newLine = line.trim();
 				newLines.add(newLine);
 			}
 		}
