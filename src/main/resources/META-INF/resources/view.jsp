@@ -55,7 +55,7 @@ request.setAttribute("patchingToolErrorLines", patchingToolErrorLines);
 				</div>
 			</c:if>
 		</div>
-		<div class-"button-holder">
+		<div class="button-holder">
 			<aui:button-row>
 				<aui:button primary="true" type="submit" value="refresh" />
 			</aui:button-row>

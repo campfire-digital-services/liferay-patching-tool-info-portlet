@@ -15,32 +15,29 @@
 */
 --%>
 
-<%@ include file="/init.jsp" %>
+<%@ include file="init.jsp" %>
 
 <%
-String portletToolErrorType = (String) portletSession.getAttribute( PortletKeys.REQUEST_KEY_PATCHING_TOOL_ERROR_TYPE );
 String portletToolErrorMessage = (String) portletSession.getAttribute( PortletKeys.REQUEST_KEY_PATCHING_TOOL_ERROR_MESSAGE );
-java.lang.Exception portletToolErrorException = (java.lang.Exception) portletSession.getAttribute( PortletKeys.REQUEST_KEY_PATCHING_TOOL_ERROR_EXCEPTION );
 %>
+<portlet:actionURL name="refreshAction" var="refreshActionURL"></portlet:actionURL>
 
-<liferay-ui:error key="error" message="unable-to-run-patching-tool" />
-
-<div class="portlet-msg-error"> 
-<p>
-<% if (portletToolErrorType != null) { %>
-<b>Error Type:</b> <%= portletToolErrorType %>
-<% } %>
-</p>
-<p>
-<% if (portletToolErrorMessage != null) { %>
-<b>Error Message:</b> <%= portletToolErrorMessage %>
-<% } %>
-</p>
-<p>
-<% if (portletToolErrorException != null) { %>
-<b>Error Exception:</b> <%= portletToolErrorException %>
-<% } %>
-</p>
+<div class="container-fluid-1280">
+	<aui:form action="${refreshActionURL}" method="post" name="fm">
+	
+		<liferay-ui:error key="error" message="unable-to-run-patching-tool" />
+		
+		<% if (portletToolErrorMessage != null) { %>
+			<div class="portlet-msg-error"> 
+				<p>
+					<b>Error Message:</b> <%= portletToolErrorMessage %>
+				</p>
+			</div>
+		<% } %>
+		<div class="button-holder">
+			<aui:button-row>
+				<aui:button primary="true" type="submit" value="refresh" />
+			</aui:button-row>
+		</div>
+	</aui:form>
 </div>
-
-<hr>
