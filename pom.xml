@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<project
-	xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
@@ -9,8 +8,7 @@
 	<groupId>au.com.permeance.liferay</groupId>
 	<artifactId>liferay-patching-tool-info-portlet</artifactId>
 	<packaging>jar</packaging>
-	<version>7.1.0.0</version>
-
+	<version>7.1.0.1-SNAPSHOT</version>
 
 	<scm>
 		<url>https://github.com/permeance/liferay-patching-tool-info-portlet</url>
@@ -20,17 +18,16 @@
 	</scm>
 
 	<properties>
-		<liferay.portal.kernel.version>3.26.1</liferay.portal.kernel.version>
-		<liferay.util.bridges.version>3.0.4</liferay.util.bridges.version>
-		<liferay.util.taglib.version>3.3.1</liferay.util.taglib.version>
-		<liferay.util.java.version>3.0.9</liferay.util.java.version>
-		<liferay.petra.string.version>2.0.1</liferay.petra.string.version>
+		<liferay.portal.kernel.version>3.0.0</liferay.portal.kernel.version>
+		<liferay.util.bridges.version>3.0.0</liferay.util.bridges.version>
+		<liferay.util.taglib.version>3.3.0</liferay.util.taglib.version>
+		<liferay.util.java.version>3.0.0</liferay.util.java.version>
+		<liferay.petra.string.version>2.0.0</liferay.petra.string.version>
 		<jstl.version>1.2</jstl.version>
 		<jsp.api.version>2.1</jsp.api.version>
 
 		<javax.portlet-api.version>2.0</javax.portlet-api.version>
 		<javax.servlet.api.version>3.0.1</javax.servlet.api.version>
-
 
 		<commons-io.version>2.6</commons-io.version>
 		<commons-lang.version>2.6</commons-lang.version>
