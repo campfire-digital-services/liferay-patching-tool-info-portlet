@@ -48,7 +48,7 @@ import au.com.permeance.liferay.portlet.patchingtoolinfo.cli.PatchingToolResults
 /**
  * Patching Tool Info MVC Portlet.
  *
- * @author Terry Mueller <terry.mueller@permeance.com.au>
+ * @author Terry Mueller
  * @author Tim Telcik
  * 
  * @see MVCPortlet
