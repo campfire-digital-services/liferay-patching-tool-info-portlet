@@ -15,7 +15,7 @@
 */
 --%>
 
-<%@ include file="/init.jsp" %>
+<%@ include file="init.jsp" %>
  
 <%
 PatchingToolResults patchingToolResults = new PatchingToolResults();
@@ -34,45 +34,31 @@ request.setAttribute("patchingToolOutputLines", patchingToolOutputLines);
 request.setAttribute("patchingToolErrorLines", patchingToolErrorLines);
 %>
 
-<c:if test="${empty patchingToolOutputLines}">
-<liferay-ui:success key="success" message="patching-tool-has-no-results" />
-</c:if>
+<portlet:actionURL name="refreshAction" var="refreshActionURL"></portlet:actionURL>
 
-<c:if test="${not empty patchingToolOutputLines}">
-<hr>
-<div id="patching_tool_controls">
-   <portlet:actionURL name="refreshAction" var="refreshActionURL"></portlet:actionURL>
-
-   <aui:form action="<%= refreshActionURL %>" method="post" name="fm">
-   
-       <aui:button
-          cssClass="btn btn-lg"
-          id="submit"
-          label="Refresh"
-          value="Refresh"          
-          primary="<%= true %>" 
-          type="submit"
-       />
- 	   
-   </aui:form>
-   
+<div class="container-fluid-1280">
+	<aui:form action="${refreshActionURL}" method="post" name="fm">
+		<div class="card-horizontal main-content-card">
+			<c:if test="${empty patchingToolOutputLines}">
+				<liferay-ui:success key="success" message="patching-tool-has-no-results" />
+			</c:if>
+			
+			<c:if test="${not empty patchingToolOutputLines}">
+				<div id="patching_tool_output_lines">
+					<p><pre><c:forEach items="${patchingToolOutputLines}" var="line"><c:out value="${line}"/><br></c:forEach></pre></p>
+				</div>
+			</c:if>
+			
+			<c:if test="${not empty patchingToolErrorLines}">
+				<div id="patching_tool_error_lines">
+					<p><pre><c:forEach items="${patchingToolErrorLines}" var="line"><c:out value="${line}"/><br></c:forEach></pre></p>
+				</div>
+			</c:if>
+		</div>
+		<div class-"button-holder">
+			<aui:button-row>
+				<aui:button primary="true" type="submit" value="refresh" />
+			</aui:button-row>
+		</div>
+	</aui:form>
 </div>
-</c:if>
-
-<c:if test="${not empty patchingToolOutputLines}">
-<hr>
-<div id="patching_tool_output_lines">
-   <pre><c:forEach items="${patchingToolOutputLines}" var="line"><c:out value="${line}"/><br></c:forEach></pre>
-</div>
-</c:if>
-
-<c:if test="${not empty patchingToolErrorLines}">
-<hr>
-<div id="patching_tool_error_lines">
-   <pre><c:forEach items="${patchingToolErrorLines}" var="line"><c:out value="${line}"/><br></c:forEach></pre>   
-</div>
-</c:if>
-
-<hr>
-
-<br>
