@@ -6,13 +6,13 @@
 	<groupId>au.com.permeance.liferay</groupId>
 	<artifactId>liferay-patching-tool-info-portlet</artifactId>
 	<packaging>jar</packaging>
-	<version>7.1.0.4</version>
+	<version>7.1.0.5-SNAPSHOT</version>
 
 	<scm>
 		<url>https://github.com/permeance/liferay-patching-tool-info-portlet</url>
 		<connection>scm:git:https://github.com/permeance/liferay-patching-tool-info-portlet.git</connection>
 		<developerConnection>scm:git:https://github.com/permeance/liferay-patching-tool-info-portlet.git</developerConnection>
-		<tag>liferay-patching-tool-info-portlet-7.1.0.4</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<properties>
