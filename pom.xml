@@ -9,7 +9,7 @@
 	<groupId>au.com.permeance.liferay</groupId>
 	<artifactId>liferay-patching-tool-info-portlet</artifactId>
 	<packaging>jar</packaging>
-	<version>7.1.0-SNAPSHOT</version>
+	<version>7.1.0.0</version>
 
 
 	<scm>
