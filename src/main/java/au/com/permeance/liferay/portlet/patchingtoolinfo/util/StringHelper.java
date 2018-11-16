@@ -71,7 +71,7 @@ public class StringHelper {
 	/** 
 	 * Trims a List of String lines.
 	 * 
-	 * @param list input List of String lines
+	 * @param lines input List of String lines
 	 * @return List of trimmed String itlinesems
 	 */
 	public static List<String> trimStringLineList(List<String> lines) {
@@ -92,7 +92,7 @@ public class StringHelper {
 	/** 
 	 * Strips end of line markers from a List of String lines.
 	 * 
-	 * @param list input List of String lines
+	 * @param lines input List of String lines
 	 * @return List of trimmed String lines
 	 */
 	public static List<String> stripEolFromStringLineList(List<String> lines) {
