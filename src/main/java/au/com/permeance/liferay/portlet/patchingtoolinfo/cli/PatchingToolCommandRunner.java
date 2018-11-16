@@ -31,7 +31,7 @@ import au.com.permeance.liferay.portlet.patchingtoolinfo.util.StringHelper;
 /**
  * Patching Tool Command Runner.
  * 
- * @author Tim Telcik <tim.telcik@permeance.com.au>
+ * @author Tim Telcik
  * 
  * @see PatchingToolResults
  */

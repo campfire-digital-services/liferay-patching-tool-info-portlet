@@ -19,7 +19,7 @@ package au.com.permeance.liferay.portlet.patchingtoolinfo;
 /**
  * Portlet Keys.
  *
- * @author Tim Telcik <tim.telcik@permeance.com.au>
+ * @author Tim Telcik
  */
 public interface PortletKeys {
 

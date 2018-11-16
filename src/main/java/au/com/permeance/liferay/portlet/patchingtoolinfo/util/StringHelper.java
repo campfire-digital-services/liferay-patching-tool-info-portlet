@@ -26,7 +26,7 @@ import org.apache.commons.lang.StringUtils;
 /**
  * String Utils Helper.
  *
- * @author Tim Telcik <tim.telcik@permeance.com.au>
+ * @author Tim Telcik
  * 
  * @see StringUtils
  */

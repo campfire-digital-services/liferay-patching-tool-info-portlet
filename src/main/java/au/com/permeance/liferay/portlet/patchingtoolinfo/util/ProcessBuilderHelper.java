@@ -24,7 +24,7 @@ import com.liferay.petra.string.StringPool;
 /**
  * Process Builder Helper.
  * 
- * @author Tim Telcik <tim.telcik@permeance.com.au>
+ * @author Tim Telcik
  * 
  * @see ProcessBuilder
  */

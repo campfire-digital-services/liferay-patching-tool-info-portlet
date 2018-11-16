@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Patching Tool Results.
  * 
- * @author Tim Telcik <tim.telcik@permeance.com.au>
+ * @author Tim Telcik
  */
 public class PatchingToolResults implements Serializable {
 	
